@@ -31,7 +31,7 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/materialize-css/dist/js/materialize.min.js",              
+              "node_modules/materialize-css/dist/js/materialize.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.all.min.js"
             ]
           },
@@ -125,8 +125,13 @@
               "devServerTarget": "MeuDogLindoFront:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "MeuDogLindoFront"
 }

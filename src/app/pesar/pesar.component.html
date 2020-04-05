@@ -4,7 +4,7 @@
 
   <mz-select-container>
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'dog'"></i>
-    <select required mz-select id="options-select" [label]="'Escolha um Animalzinho'" [placeholder]="'Escolha um Animalzinho'" name="idAnimal" [(ngModel)]="animal" >
+    <select required mz-select id="options-select" [label]="'Escolha um Animalzinho'" [placeholder]="'Escolha um Animalzinho'" name="idAnimal" [(ngModel)]="idAnimal" >
       <option *ngFor="let item of listaAnimais" class="left circle" [value]="item.id">{{item.nome}} </option>
     </select>
   </mz-select-container>
