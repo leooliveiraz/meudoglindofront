@@ -1,0 +1,28 @@
+<h1 class="yellow-text text-darken-1 center-align">Cadastrar um Animalzinho!</h1>
+<form #f="ngForm" (ngSubmit)="cadastrar(f)">
+  <input type="hidden" [(ngModel)]="id" name='id'>
+  <mz-input-container>
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'dog'">
+    </i>
+    <input mz-input [(ngModel)]="nome"
+      name="nome"
+      class="white-text" [label]="'Qual o nome do seu bichinho?'" 
+      length="150" type="text">
+  </mz-input-container>
+
+  <mz-input-container>
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
+    </i>
+    <input mz-datepicker [(ngModel)]="dataNascimento" 
+      name="dataNascimento" class="white-text" [label]="'E a data de nascimento?'"
+      [options]="options" id="datepicker" type="text">
+  </mz-input-container>
+
+  <div class="right-align">
+    <br />
+    <button mz-button [large]="true" class="orange accent-3 white-text"  type="submit">
+      <i mz-icon-mdi [align]="'left'" [icon]="'cards-heart'" [size]="'36px'"> </i>
+      Salvar
+    </button>
+  </div>
+</form>

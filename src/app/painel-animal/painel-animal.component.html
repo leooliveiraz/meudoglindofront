@@ -1,0 +1,18 @@
+<h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
+
+<div style="display: block;" style="background-color: whitesmoke;">
+          <canvas baseChart width="400" height="150"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"      
+                      [chartType]="'line'"></canvas>
+</div>
+
+<mz-collection>
+          <mz-collection-item *ngFor="let item of lista">
+                    Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
+                    <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
+                              <i mz-icon-mdi [icon]="'delete'"></i></a>
+          </mz-collection-item>
+               
+</mz-collection>

@@ -1,0 +1,20 @@
+<mz-sidenav 
+  [id]="'sidenav'"
+  [collapseButtonId]="'btn-sidenav'"
+  [backgroundClass]="'purple accent-3'"
+  [fixed]="'true'">
+  <mz-sidenav-header>
+    <div class="logo">
+      <a [routerLink]="['']">
+        <img src="https://img.icons8.com/color/96/000000/dog-house.png"/>
+      </a>
+      <h4>MeuDogLindo</h4>
+    </div>
+  </mz-sidenav-header>
+  <mz-sidenav-link class="center-align">
+    <a [routerLink]="['/meus-bichinhos']" routerLinkActive="active">Meus Bichinhos</a>
+    <a [routerLink]="['/cadastrar']" routerLinkActive="active"  >Adicionar um Animalzinho</a>
+    <a [routerLink]="['/pesar']" routerLinkActive="active"  >Pesar meu Bichinho</a>
+  </mz-sidenav-link>
+  
+</mz-sidenav>

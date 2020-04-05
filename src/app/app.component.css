@@ -1,0 +1,51 @@
+.espaco-menu{
+          min-width: 300px;
+          max-width: 300px;
+          width: 300px;
+}
+.espaco-telas{
+          float: none;
+}
+
+.pagina{
+          margin-top: 3em;
+          margin-left: 1em;
+}
+
+
+::ng-deep .character-counter{
+  color: white !important;
+}
+
+::ng-deep input{
+  font-size: larger !important;
+}
+
+::ng-deep .input-field label
+{
+color: #fdd835 ;
+}
+::ng-deep label .active{
+  color: #fdd835;
+}
+
+::ng-deep .input-field label :focus
+{
+color: #fdd835 ;
+}
+::ng-deep label .active :focus{
+  color: #fdd835;
+}
+
+::ng-deep input[type=text]:not(.browser-default):focus:not([readonly]) {
+border-bottom: 1px solid #fdd835;
+box-shadow: 0 1px 0 0 #fdd835;
+}
+
+::ng-deep input[type=text]:not(.browser-default):focus:not([readonly]) + label{
+color: #fdd835;
+}
+
+::ng-deep .select-wrapper input.select-dropdown{
+  color: white !important;
+}
