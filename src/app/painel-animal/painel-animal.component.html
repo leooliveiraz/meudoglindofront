@@ -1,13 +1,18 @@
 <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
 
-<div style="display: block;" style="background-color: whitesmoke;">
-          <canvas baseChart width="400" height="150"
+<div style="display: block;">
+          <canvas  class="grafico" baseChart 
+                    height=350
                       [datasets]="lineChartData"
                       [labels]="lineChartLabels"
-                      [options]="lineChartOptions"      
+                      [options]="lineChartOptions"
                       [chartType]="'line'"></canvas>
 </div>
-
+<div class="right-align">
+          <a mz-button  [float]='true' [routerLink]="'/pesar'"  [queryParams]="{ animal: idAnimal }">
+                    <i mz-icon-mdi [align]="'left'" [icon]="'plus'" [size]="'small'"> </i>
+          </a>
+</div>
 <mz-collection>
           <mz-collection-item *ngFor="let item of lista">
                     Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}

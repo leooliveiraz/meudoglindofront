@@ -24,15 +24,25 @@ export class PainelAnimalComponent implements OnInit {
   idAnimal;
   animal: any;
   lista: any = [];
+  public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
   ];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: any = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
+      xAxes: [{
+        ticks: {
+          stepSize: 1,
+          min: 0,
+          maxRotation: 89,
+          minRotation: (this.innerWidth < 900 ? 80 : 0),
+          autoSkip: false
+       }
+      }],
       yAxes: [
         {
           id: 'y-axis-0',
@@ -44,6 +54,8 @@ export class PainelAnimalComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
+    console.log((this.innerWidth < 900 ? 80 : 0))
     this.idAnimal = this.activatedRoute.snapshot.paramMap.get('idAnimal');
     this.carregarAnimal();
   }
@@ -64,9 +76,11 @@ export class PainelAnimalComponent implements OnInit {
 
   configurarGrafico(){
     this.lineChartData[0].label = this.animal.nome;
+    this.lineChartData[0].data = [];
+    this.lineChartLabels = [];
     for (const item of this.lista) {
       this.lineChartData[0].data.push(item.peso);
-      this.lineChartLabels.push( new DatePipe('en-US').transform(item.dataPesagem, 'dd/MM/yyyy') );
+      this.lineChartLabels.push( new DatePipe('en-US').transform(item.dataPesagem, 'dd/MM/yy') );
     }
   }
 

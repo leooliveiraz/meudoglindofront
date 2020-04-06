@@ -27,7 +27,7 @@ export class CadastarAnimalComponent implements OnInit {
       weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
       selectMonths: true,
       selectYears: true,
-      clear: 'false',
+      clear: 'Limpar',
       today: 'Hoje'
     };
   
@@ -45,7 +45,6 @@ export class CadastarAnimalComponent implements OnInit {
   }
 
   cadastrar(form: any) {
-    console.log(form.form.value)
     if ( this.id ) {
       this.animalService.alterar(form.form.value).subscribe(res => {
         this.toastService.show('Os dados do seu bichinho foram atualizados com sucesso!', 1000, 'green');

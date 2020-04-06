@@ -10,20 +10,20 @@
   </mz-select-container>
 
   <mz-input-container>
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
+    </i>
+    <input mz-datepicker [(ngModel)]="dataPesagem" 
+    name="dataPesagem" class="white-text" [label]="'Quando foi feita a pesagem?'"
+    [options]="options" id="datepicker" type="number">
+  </mz-input-container>
+
+  <mz-input-container>
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'weight-kilogram'"></i>
     <input mz-input [(ngModel)]="peso"
                               name="peso"
                               class="white-text" [label]="'Qual o peso do seu bichinho?'" 
                               length="150" type="text">
   </mz-input-container>
-
-<mz-input-container>
-<i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
-</i>
-<input mz-datepicker [(ngModel)]="dataPesagem" 
-name="dataPesagem" class="white-text" [label]="'Quando foi feita a pesagem?'"
-[options]="options" id="datepicker" type="number">
-</mz-input-container>
 
   <div class="right-align">
     <br />

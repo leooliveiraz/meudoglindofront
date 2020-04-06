@@ -2,7 +2,7 @@ import { AnimalService } from './../service/animal.service';
 import { Component, OnInit } from '@angular/core';
 import { PesoService } from '../service/peso.service';
 import { MzToastService } from 'ngx-materialize';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pesar',
@@ -14,6 +14,7 @@ export class PesarComponent implements OnInit {
     private animalService: AnimalService,
     private pesoService: PesoService,
     private toastService: MzToastService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
   ) { }
   idAnimal: number = null;
@@ -34,11 +35,15 @@ export class PesarComponent implements OnInit {
       weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
       selectMonths: true,
       selectYears: true,
-      clear: 'false',
+      clear: 'Limpar',
       today: 'Hoje'
     };
   
-  ngOnInit() {
+  ngOnInit() {    
+    let animal = this.activatedRoute.snapshot.queryParamMap.get('animal');
+    if(animal){
+      this.idAnimal = parseInt(animal); ;
+    }
     this.carregarAnimais();
   }
 
