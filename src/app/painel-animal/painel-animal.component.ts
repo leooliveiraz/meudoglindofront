@@ -19,7 +19,9 @@ export class PainelAnimalComponent implements OnInit {
     private pesoService: PesoService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService
-  ) { }
+  ) {
+    this.innerWidth = window.innerWidth;
+   }
 
   idAnimal;
   animal: any;
@@ -54,8 +56,6 @@ export class PainelAnimalComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.innerWidth = window.innerWidth;
-    console.log((this.innerWidth < 900 ? 80 : 0))
     this.idAnimal = this.activatedRoute.snapshot.paramMap.get('idAnimal');
     this.carregarAnimal();
   }
