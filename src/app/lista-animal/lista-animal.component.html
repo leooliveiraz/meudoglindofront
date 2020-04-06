@@ -2,7 +2,7 @@
 
 <mz-collection>
           <mz-collection-item *ngFor="let item of lista">
-                    {{ item.nome }}
+                    <span class="pointer" [routerLink]="['/painel/'+item.id]" >{{ item.nome }}</span>
                     <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
                               <i mz-icon-mdi [icon]="'delete'"></i></a>
                     <a [routerLink]="['/editar/'+item.id]" class="green-text"
