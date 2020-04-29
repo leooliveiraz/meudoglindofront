@@ -18,6 +18,24 @@
       [options]="options" id="datepicker" type="text">
   </mz-input-container>
 
+  <mz-checkbox-container>
+    <input mz-checkbox [(ngModel)]="declararObito" 
+      name="declararObito"
+      class="white-text checkbox-orange "
+      [filledIn]="true"
+      [label]="'Declarar Óbito'"
+      id="checkbox-id"
+      type="checkbox">
+  </mz-checkbox-container>
+
+  <mz-input-container *ngIf="declararObito">
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'christianity'">
+    </i>
+    <input mz-datepicker [(ngModel)]="dataObito" 
+      name="dataObito" class="white-text" [label]="'Sinto muito. Qual a data de óbito?'"
+      [options]="options" id="dataObito" type="text">
+  </mz-input-container>
+
   <div class="right-align">
     <br />
     <button mz-button [large]="true" class="orange accent-3 white-text"  type="submit">

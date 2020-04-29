@@ -49,3 +49,15 @@ color: #fdd835;
 ::ng-deep .select-wrapper input.select-dropdown{
   color: white !important;
 }
+
+::ng-deep [type="checkbox"] + label{
+  color: white !important;
+}
+
+::ng-deep .checkbox-field{
+  margin-left: 5px !important;
+}
+
+.checkbox-orange[type="checkbox"].filled-in:checked + label:after{
+  background-color: #ff9800;
+}

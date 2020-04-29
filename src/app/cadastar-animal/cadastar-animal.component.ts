@@ -34,6 +34,8 @@ export class CadastarAnimalComponent implements OnInit {
     id = null;
     nome = '';
     dataNascimento = '';
+    dataObito = '';
+    declararObito = false;
 
   ngOnInit() {
     this.id = this.activateRoute.snapshot.paramMap.get("id");
@@ -41,7 +43,9 @@ export class CadastarAnimalComponent implements OnInit {
       const animal: any = res;
       this.nome = animal.nome;
       this.dataNascimento = animal.dataNascimento;
-    })
+      this.dataObito = animal.dataObito;
+      this.declararObito = (this.dataObito != null && animal.dataObito.length > 0);
+    });
   }
 
   cadastrar(form: any) {
