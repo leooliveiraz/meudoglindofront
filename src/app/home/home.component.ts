@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthorizationService } from '../service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { AuthService } from '../service/auth.service';
 })
 export class HomeComponent implements OnInit {
   estaLogado = false;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthorizationService) {}
 
   ngOnInit() {
     this.estaLogado = this.authService.estaLogado();

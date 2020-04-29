@@ -27,6 +27,20 @@ import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { LoginGoogleComponent } from './login-google/login-google.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SobreComponent } from './sobre/sobre.component';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
+
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('831677366245-kst0gbnp03n8912pnv5bdqms1gk8giim.apps.googleusercontent.com')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -49,6 +63,7 @@ import { SobreComponent } from './sobre/sobre.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SocialLoginModule,
     BrowserAnimationsModule,
     MzSidenavModule,
     MzIconModule,
@@ -63,7 +78,12 @@ import { SobreComponent } from './sobre/sobre.component';
     ChartsModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
