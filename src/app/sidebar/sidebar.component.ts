@@ -1,18 +1,19 @@
-import { HostListener, Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  innerWidth:any;
+  @Input() estaLogado: boolean;
 
   constructor() { }
-  innerWidth:any;
   ngOnInit() {
   }
 
-  fecharMenu(){
-    if(innerWidth < 1200 ){
+  fecharMenu() {
+    if (innerWidth < 1200 ) {
       document.getElementById("btn-sidenav").click();
     }
   }

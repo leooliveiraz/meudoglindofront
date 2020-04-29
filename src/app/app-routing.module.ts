@@ -1,3 +1,4 @@
+import { SobreComponent } from './sobre/sobre.component';
 import { HomeComponent } from './home/home.component';
 import { PaginaAnimalComponent } from './pagina-animal/pagina-animal.component';
 import { ListaAnimalComponent } from './lista-animal/lista-animal.component';
@@ -16,7 +17,11 @@ const routes: Routes = [
   { path: 'meulindo', component: PaginaAnimalComponent },
   { path: 'painel/:idAnimal', component: PainelAnimalComponent },
   
-  { path: 'pesar', component: PesarComponent }
+  { path: 'pesar', component: PesarComponent },
+
+  { path: 'sobre', component: SobreComponent },
+
+
 ];
 
 @NgModule({

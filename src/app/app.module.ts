@@ -24,6 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
+import { LoginGoogleComponent } from './login-google/login-google.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SobreComponent } from './sobre/sobre.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
     ListaAnimalComponent,
     HomeComponent,
     PesarComponent,
-    PainelAnimalComponent
+    PainelAnimalComponent,
+    LoginGoogleComponent,
+    LogoutComponent,
+    SobreComponent
   ],
   imports: [
     BrowserModule,
