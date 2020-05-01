@@ -17,11 +17,9 @@ export class AppComponent implements OnInit{
 
         if (event instanceof NavigationEnd) {
           this.estaLogado = this.authService.estaLogado();
-          console.log(this.estaLogado);
         }
 
         if (event instanceof NavigationError) {
-          console.log(event.error);
         }
     });
   }
