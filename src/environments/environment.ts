@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   API_URL: 'http://localhost:8080/',
-  APP_URL: 'http://localhost:4200/'
+  APP_URL: 'http://localhost:4200/',
+  GOOGLE_ID: '831677366245-kst0gbnp03n8912pnv5bdqms1gk8giim.apps.googleusercontent.com'
 };
 
 /*

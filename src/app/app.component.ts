@@ -8,7 +8,7 @@ import { AuthorizationService } from './service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'MeuDogLindoFront';
+  title = 'MeuDogLindo';
   estaLogado = false;
   constructor(private router: Router, private authService: AuthorizationService) {
     this.router.events.subscribe((event: Event) => {

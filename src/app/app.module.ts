@@ -30,12 +30,13 @@ import { LogoutComponent } from './logout/logout.component';
 import { SobreComponent } from './sobre/sobre.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
 
 
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('831677366245-kst0gbnp03n8912pnv5bdqms1gk8giim.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider(environment.GOOGLE_ID)
   }
 ]);
 
