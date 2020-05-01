@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './service/auth/token-interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,7 +22,7 @@ import { PaginaAnimalComponent } from './pagina-animal/pagina-animal.component';
 import { ListaAnimalComponent } from './lista-animal/lista-animal.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { LoginGoogleComponent } from './login-google/login-google.component';
@@ -80,6 +81,7 @@ export function provideConfig() {
 
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

@@ -22,7 +22,7 @@
     "@mdi/font": "^5.0.45",
     "@sweetalert2/theme-material-ui": "^3.1.4",
     "angular-cli-ghpages": "^0.6.2",
-    "angularx-social-login": "^2.3.1",
+    "angularx-social-login": "^2.2.1",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.0",
     "ngx-materialize": "^6.1.3",

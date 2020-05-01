@@ -20,11 +20,12 @@ export class AuthorizationService {
   }
 
   guardarAutenticacao(googleUser) {
-    localStorage.setItem('profile', googleUser);
+    localStorage.setItem('profile', JSON.stringify(googleUser));
   }
 
   getUsuario() {
-    return localStorage.getItem('profile');
+    const usuarioJSON = localStorage.getItem('profile');
+    return JSON.parse(usuarioJSON);
   }
   estaLogado() {
     return localStorage.getItem('profile') == null ? false : true;
