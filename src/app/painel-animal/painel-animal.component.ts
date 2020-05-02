@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PesoService } from '../service/peso.service';
 import { AnimalService } from '../service/animal.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -18,7 +18,8 @@ export class PainelAnimalComponent implements OnInit {
     private animalService: AnimalService,
     private pesoService: PesoService,
     private activatedRoute: ActivatedRoute,
-    private toastService: MzToastService
+    private toastService: MzToastService,
+    private router: Router
   ) {
     this.innerWidth = window.innerWidth;
    }
@@ -63,6 +64,12 @@ export class PainelAnimalComponent implements OnInit {
   carregarAnimal() {
     this.animalService.buscar(this.idAnimal).subscribe(res => {
       this.animal = res;
+      if (this.animal == null) {
+        Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
+        .then(
+          () => this.router.navigateByUrl('/meus-bichinhos')
+        );
+      }
       this.carregarPesos();
     });
   }

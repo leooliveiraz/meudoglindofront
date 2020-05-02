@@ -18,7 +18,6 @@ import { MzSelectModule } from 'ngx-materialize';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CadastarAnimalComponent } from './cadastar-animal/cadastar-animal.component';
-import { PaginaAnimalComponent } from './pagina-animal/pagina-animal.component';
 import { ListaAnimalComponent } from './lista-animal/lista-animal.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
@@ -51,7 +50,6 @@ export function provideConfig() {
     RodapeComponent,
     SidebarComponent,
     CadastarAnimalComponent,
-    PaginaAnimalComponent,
     ListaAnimalComponent,
     HomeComponent,
     PesarComponent,

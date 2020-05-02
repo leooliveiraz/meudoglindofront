@@ -5,10 +5,10 @@
   [fixed]="'true'">
   <mz-sidenav-header>
     <div class="logo">
-      <a [routerLink]="['']" (click)="fecharMenu()">
+      <a [routerLink]="['/']" (click)="fecharMenu()">
         <img src="https://img.icons8.com/color/96/000000/dog-house.png"/>
       </a>
-      <h4>MeuDogLindo</h4>
+      <h4 [routerLink]="['/']" (click)="fecharMenu()">Meu Pet Lindo</h4>
     </div>
   </mz-sidenav-header>
   <mz-sidenav-link class="center-align" *ngIf="estaLogado">

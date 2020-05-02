@@ -2,6 +2,7 @@ import { AnimalService } from './../service/animal.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MzToastService } from 'ngx-materialize';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cadastar-animal',
@@ -42,6 +43,12 @@ export class CadastarAnimalComponent implements OnInit {
     if (this.id != null) {
       this.animalService.buscar(this.id).subscribe(res => {
         const animal: any = res;
+        if (animal == null) {
+          Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
+          .then(
+            () => this.router.navigateByUrl('/meus-bichinhos')
+          );
+        }
         this.nome = animal.nome;
         this.dataNascimento = animal.dataNascimento;
         this.dataObito = animal.dataObito;

@@ -1,6 +1,5 @@
 import { SobreComponent } from './sobre/sobre.component';
 import { HomeComponent } from './home/home.component';
-import { PaginaAnimalComponent } from './pagina-animal/pagina-animal.component';
 import { ListaAnimalComponent } from './lista-animal/lista-animal.component';
 import { CadastarAnimalComponent } from './cadastar-animal/cadastar-animal.component';
 import { NgModule } from '@angular/core';
@@ -14,14 +13,9 @@ const routes: Routes = [
   { path: 'cadastrar', component: CadastarAnimalComponent },
   { path: 'editar/:id', component: CadastarAnimalComponent },
   { path: 'meus-bichinhos', component: ListaAnimalComponent },
-  { path: 'meulindo', component: PaginaAnimalComponent },
   { path: 'painel/:idAnimal', component: PainelAnimalComponent },
-  
   { path: 'pesar', component: PesarComponent },
-
   { path: 'sobre', component: SobreComponent },
-
-
 ];
 
 @NgModule({
