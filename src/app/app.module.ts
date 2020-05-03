@@ -30,6 +30,7 @@ import { SobreComponent } from './sobre/sobre.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 const config = new AuthServiceConfig([
@@ -76,7 +77,8 @@ export function provideConfig() {
     MzToastModule,
     MzSelectModule,
     MzCheckboxModule ,
-    ChartsModule
+    ChartsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [
