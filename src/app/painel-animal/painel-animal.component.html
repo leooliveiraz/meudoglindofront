@@ -1,31 +1,35 @@
 <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
 <div class="yellow-text text-darken-1 center-align info" >
   <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'"></i>
-  {{animal?.dataNascimento}}
+  {{animal?.dataNascimento | date: 'dd/MM/yyyy' }}
 </div>
 <div class="yellow-text text-darken-1 center-align info" *ngIf="animal.dataObito" >
   <i mz-icon-mdi [align]="'center'" [icon]="'christianity'" [size]="'large'"></i>
-  {{animal?.dataObito}}
+  {{animal?.dataObito | date: 'dd/MM/yyyy' }}
 </div>
 <br>
-<div style="display: block;">
-          <canvas  class="grafico" baseChart 
-                    height=350
-                      [datasets]="lineChartData"
-                      [labels]="lineChartLabels"
-                      [options]="lineChartOptions"
-                      [chartType]="'line'"></canvas>
+<div *ngIf="listaPeso != null && listaPeso.length > 0">
+    
+  <div style="display: block;">
+            <canvas  class="grafico" baseChart 
+                      height=350
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [chartType]="'line'"></canvas>
+  </div>
+  <div class="right-align">
+            <a mz-button  [float]='true' [routerLink]="'/pesar'"  [queryParams]="{ animal: idAnimal }">
+                      <i mz-icon-mdi [align]="'left'" [icon]="'plus'" [size]="'small'"> </i>
+            </a>
+  </div>
+  <mz-collection>
+            <mz-collection-item *ngFor="let item of listaPeso">
+                      Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
+                      <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
+                                <i mz-icon-mdi [icon]="'delete'"></i></a>
+            </mz-collection-item>
+                
+  </mz-collection>
+
 </div>
-<div class="right-align">
-          <a mz-button  [float]='true' [routerLink]="'/pesar'"  [queryParams]="{ animal: idAnimal }">
-                    <i mz-icon-mdi [align]="'left'" [icon]="'plus'" [size]="'small'"> </i>
-          </a>
-</div>
-<mz-collection>
-          <mz-collection-item *ngFor="let item of lista">
-                    Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
-                    <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
-                              <i mz-icon-mdi [icon]="'delete'"></i></a>
-          </mz-collection-item>
-               
-</mz-collection>

@@ -26,7 +26,7 @@ export class PainelAnimalComponent implements OnInit {
 
   idAnimal;
   animal: any;
-  lista: any = [];
+  listaPeso: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
@@ -76,7 +76,7 @@ export class PainelAnimalComponent implements OnInit {
 
   carregarPesos() {
     this.pesoService.listarPorAnimal(this.idAnimal).subscribe(res => {
-      this.lista = res;
+      this.listaPeso = res;
       this.configurarGrafico();
     });
   }
@@ -85,7 +85,7 @@ export class PainelAnimalComponent implements OnInit {
     this.lineChartData[0].label = this.animal.nome;
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
-    for (const item of this.lista) {
+    for (const item of this.listaPeso) {
       this.lineChartData[0].data.push(item.peso);
       this.lineChartLabels.push( new DatePipe('en-US').transform(item.dataPesagem, 'dd/MM/yy') );
     }

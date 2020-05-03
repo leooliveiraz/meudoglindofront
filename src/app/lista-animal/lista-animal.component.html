@@ -1,6 +1,6 @@
 <h1 class="yellow-text text-darken-1 center-align">Meus Bichinhos!</h1>
 
-<mz-collection>
+<mz-collection *ngIf="lista != null && lista.length > 0">
           <mz-collection-item *ngFor="let item of lista">
                     <span class="pointer" [routerLink]="['/painel/'+item.id]" >{{ item.nome }}</span>
                     <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>

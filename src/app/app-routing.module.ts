@@ -6,15 +6,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
+import { AuthGuardService } from './service/auth/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'cadastrar', component: CadastarAnimalComponent },
-  { path: 'editar/:id', component: CadastarAnimalComponent },
-  { path: 'meus-bichinhos', component: ListaAnimalComponent },
-  { path: 'painel/:idAnimal', component: PainelAnimalComponent },
-  { path: 'pesar', component: PesarComponent },
+  { path: 'cadastrar', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
+  { path: 'editar/:id', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
+  { path: 'meus-bichinhos', component: ListaAnimalComponent, canActivate: [AuthGuardService] },
+  { path: 'painel/:idAnimal', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
+  { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
   { path: 'sobre', component: SobreComponent },
 ];
 
