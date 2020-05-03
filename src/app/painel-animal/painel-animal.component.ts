@@ -25,6 +25,7 @@ export class PainelAnimalComponent implements OnInit {
    }
 
   idAnimal;
+  carregando = false;
   animal: any;
   listaPeso: any = [];
   public innerWidth: any;
@@ -62,6 +63,7 @@ export class PainelAnimalComponent implements OnInit {
   }
 
   carregarAnimal() {
+    this.carregando = true;
     this.animalService.buscar(this.idAnimal).subscribe(res => {
       this.animal = res;
       if (this.animal == null) {
@@ -71,14 +73,15 @@ export class PainelAnimalComponent implements OnInit {
         );
       }
       this.carregarPesos();
-    });
+    }, erro => this.carregando = false);
   }
 
   carregarPesos() {
     this.pesoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaPeso = res;
+      this.carregando = false;
       this.configurarGrafico();
-    });
+    }, erro => this.carregando = false);
   }
 
   configurarGrafico(){
@@ -95,13 +98,13 @@ export class PainelAnimalComponent implements OnInit {
   excluir(id) {
     Swal.fire({
       title: 'Tem certeza?',
-      text: "Ao confirmar essa ação, você concorda em excluir essa pesagem.",
+      text: 'Ao confirmar essa ação, você concorda em excluir essa pesagem.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim!'
+      confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
         this.pesoService.deletar(id).subscribe(res => {

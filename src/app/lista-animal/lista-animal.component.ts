@@ -15,6 +15,7 @@ export class ListaAnimalComponent implements OnInit {
     private toastService: MzToastService) { }
 
   lista: any = [];
+  carregando = false;
 
 
   ngOnInit() {
@@ -24,13 +25,13 @@ export class ListaAnimalComponent implements OnInit {
   excluir(id) {
     Swal.fire({
       title: 'Tem certeza?',
-      text: "Se confirmar, você irá excluir esse animalzinho e seu histórico.",
+      text: 'Se confirmar, você irá excluir esse animalzinho e seu histórico.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim!'
+      confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
         this.service.deletar(id).subscribe(res => {
@@ -42,8 +43,12 @@ export class ListaAnimalComponent implements OnInit {
   }
 
   carregar() {
+    this.carregando = true;
     this.service.listar().subscribe(res => {
       this.lista = res;
+      this.carregando = false;
+    }, erro => {
+      this.carregando = false;
     });
   }
 

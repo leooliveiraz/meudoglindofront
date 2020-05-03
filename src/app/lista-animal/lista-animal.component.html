@@ -1,16 +1,30 @@
 <h1 class="yellow-text text-darken-1 center-align">Meus Bichinhos!</h1>
-
+<div class="white-text text-darken-1 center-align" *ngIf="carregando">
+  Por favor aguarde, estamos carregando as informações do seu bichinho.
+</div>
 <mz-collection *ngIf="lista != null && lista.length > 0">
-          <mz-collection-item *ngFor="let item of lista">
-                    <span class="pointer" [routerLink]="['/painel/'+item.id]" >{{ item.nome }}</span>
-                    <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
-                              <i mz-icon-mdi [icon]="'delete'"></i></a>
-                    <a [routerLink]="['/editar/'+item.id]" class="green-text"
-                    mz-secondary-content><i mz-icon-mdi [icon]="'square-edit-outline'"></i></a>
-                    
-                    <a [routerLink]="['/painel/'+item.id]" class="deep-purple-text text-darken-4"
-                    mz-secondary-content><i mz-icon-mdi [icon]="'chart-bell-curve-cumulative'"></i></a>
-                    
-          </mz-collection-item>
-               
+  <mz-collection-item *ngFor="let item of lista">
+    <span class="pointer" [routerLink]="['/painel/'+item.id]">{{ item.nome }}</span>
+    <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
+      <i mz-icon-mdi [icon]="'delete'"></i></a>
+    <a [routerLink]="['/editar/'+item.id]" class="green-text" mz-secondary-content><i mz-icon-mdi
+        [icon]="'square-edit-outline'"></i></a>
+
+    <a [routerLink]="['/painel/'+item.id]" class="deep-purple-text text-darken-4" mz-secondary-content><i mz-icon-mdi
+        [icon]="'chart-bell-curve-cumulative'"></i></a>
+
+  </mz-collection-item>
+
 </mz-collection>
+
+<div class="white-text text-darken-1 center-align" *ngIf="!carregando && lista.length === 0">
+  <p>
+    Você ainda não possui nenhum animalzinho cadastrado, clique no botão abaixo para cadastrar.
+  </p>
+  <br>
+  <p class="center-align">
+    <button mz-button class="purple accent-3" [routerLink]="['/cadastrar']">
+      Cadastrar um Animalzinho
+    </button>
+  </p>
+</div>

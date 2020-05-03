@@ -3,3 +3,9 @@
 h1 {
           margin-bottom: 1em !important;
 }
+
+@media (min-width: 900px) {
+          html {
+                    font-size: 16px !important;
+          }
+}

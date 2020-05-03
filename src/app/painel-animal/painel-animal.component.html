@@ -1,3 +1,4 @@
+
 <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
 <div class="yellow-text text-darken-1 center-align info" >
   <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'"></i>
@@ -8,6 +9,13 @@
   {{animal?.dataObito | date: 'dd/MM/yyyy' }}
 </div>
 <br>
+<div class="white-text text-darken-1 center-align" *ngIf="carregando" >
+  Por favor aguarde, estamos carregando as informações do seu bichinho.
+</div>
+
+<div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaPeso.length === 0" >
+  Parece que você ainda não adicionou um registro de pesagem para o seu bichinho, clique no botão ao lado para adicionar.
+</div>
     
 <div style="display: block;" *ngIf="listaPeso != null && listaPeso.length > 0">
           <canvas  class="grafico" baseChart 
