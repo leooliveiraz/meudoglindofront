@@ -1,3 +1,5 @@
-::ng-deep nav .brand-logo {
-          width: 100%;
+@media (max-width: 600px) {
+          ::ng-deep nav .brand-logo {
+                    width: 100%;
+          }
 }
