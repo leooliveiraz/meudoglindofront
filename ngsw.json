@@ -1,0 +1,106 @@
+{
+  "configVersion": 1,
+  "timestamp": 1588542561471,
+  "index": "https://leooliveiraz.github.io/meupetlindo/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://leooliveiraz.github.io/meupetlindo/favicon.ico",
+        "https://leooliveiraz.github.io/meupetlindo/index.html",
+        "https://leooliveiraz.github.io/meupetlindo/main.dce9a61b85167e9078c1.js",
+        "https://leooliveiraz.github.io/meupetlindo/manifest.webmanifest",
+        "https://leooliveiraz.github.io/meupetlindo/polyfills-es5.9d3b675374229d018cec.js",
+        "https://leooliveiraz.github.io/meupetlindo/polyfills.d15cf5b3fe5c097b06a9.js",
+        "https://leooliveiraz.github.io/meupetlindo/runtime.458556a34b891ea32398.js",
+        "https://leooliveiraz.github.io/meupetlindo/scripts.4460407f411e5bfba65f.js",
+        "https://leooliveiraz.github.io/meupetlindo/styles.0269d9146c3edb35c843.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Bold.c0f1e4a4fdfb8048c72e.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Bold.eed9aab5449cc9c8430d.woff",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Light.3c37aa69cd77e6a53a06.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Light.ea36cd9a0e9eee97012a.woff",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Medium.1561b424aaef2f704bbd.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Medium.cf4d60bc0b1d4b231408.woff",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.3cf6adf61054c328b1b0.woff",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.5136cbe62a63604402f2.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.1f35e6a11d27d2e10d28.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.44b78f142603eb69f593.woff",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-128x128.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-144x144.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-152x152.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-192x192.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-384x384.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-512x512.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-72x72.png",
+        "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-96x96.png",
+        "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.63d2a5950fc212096c36.woff",
+        "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.7fb0e3780372f10f8045.woff2",
+        "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.a1a0ed860f50ffd42ba4.eot",
+        "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.fe1545ef4dd1eef2f1e2.ttf"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Bold.c0f1e4a4fdfb8048c72e.woff2": "5a8465896222227807ff29908d8648db510561a5",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Bold.eed9aab5449cc9c8430d.woff": "e0655b6097eddf9df88cd194eff08436ea086a1c",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Light.3c37aa69cd77e6a53a06.woff2": "f6daab924b79b4822dc9faa56bbefe1d1efa3e42",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Light.ea36cd9a0e9eee97012a.woff": "c7494493f62984e2f581598739b5dd340e9e891b",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Medium.1561b424aaef2f704bbd.woff2": "7c512e2ebddd4dbd08d0f7bfb5b772501f707078",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Medium.cf4d60bc0b1d4b231408.woff": "b17bd60107c9ec0fd8c58a9e1fd222da7f1b99f4",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.3cf6adf61054c328b1b0.woff": "6cfb2a5eb3a601ba450dda2d80bacef26c5ba873",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.5136cbe62a63604402f2.woff2": "c193deaa915e7183828400922700567900fb6cc3",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.1f35e6a11d27d2e10d28.woff2": "c321aeb611cf1dcb25717484a4ced717d8ca76fa",
+    "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.44b78f142603eb69f593.woff": "cb8f61464f349af887ba96f6a2ae1e318b3cc8d9",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-128x128.png": "450832ca44a0d364edee420a9661857d3cdd5498",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-144x144.png": "450832ca44a0d364edee420a9661857d3cdd5498",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-152x152.png": "450832ca44a0d364edee420a9661857d3cdd5498",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-192x192.png": "eeac5e5ab779a02f8cd55c465c7f2c852cbcaf00",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-384x384.png": "104c55380931b6b5ae60cf50b04c373069d1b77b",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-512x512.png": "a4adc5136e554efe199355231c1eb81312916469",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-72x72.png": "4dc3735c9799ac2752292dae54896a6016bff6a4",
+    "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-96x96.png": "a4adc5136e554efe199355231c1eb81312916469",
+    "https://leooliveiraz.github.io/meupetlindo/favicon.ico": "0e73a3caac48e66ae8553e73632eb1f7a4016783",
+    "https://leooliveiraz.github.io/meupetlindo/index.html": "ef86812abfaf84f8441befbfdc5894737ff950b3",
+    "https://leooliveiraz.github.io/meupetlindo/main.dce9a61b85167e9078c1.js": "29305c90edc7d2b7229e32683583332f6e8dc602",
+    "https://leooliveiraz.github.io/meupetlindo/manifest.webmanifest": "23fc9c1e10e219ffa5ce43ea20bec768fb50b4e7",
+    "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.63d2a5950fc212096c36.woff": "082e6c486ea2fe3823ba7dfb6dadabd0b30a499c",
+    "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.7fb0e3780372f10f8045.woff2": "2b5469fc9cc994a4b4bfe625f6264434d1deaab7",
+    "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.a1a0ed860f50ffd42ba4.eot": "9c1ac08148bc5c9e0ce36e8163d3cbaf568e76a9",
+    "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.fe1545ef4dd1eef2f1e2.ttf": "909e55c031551ab04c7ded2a5a6037adfad504b2",
+    "https://leooliveiraz.github.io/meupetlindo/polyfills-es5.9d3b675374229d018cec.js": "cfb31f62bc1c5cd1b40ba592d530d92e58b7f2b5",
+    "https://leooliveiraz.github.io/meupetlindo/polyfills.d15cf5b3fe5c097b06a9.js": "ea190a5e66e74daa0e571c47946b11353906b882",
+    "https://leooliveiraz.github.io/meupetlindo/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://leooliveiraz.github.io/meupetlindo/scripts.4460407f411e5bfba65f.js": "e9f210758d8ed29681fa1667b5a13baa01931860",
+    "https://leooliveiraz.github.io/meupetlindo/styles.0269d9146c3edb35c843.css": "c45e5640544a57646d03127fa7189a5ee04857b0"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
