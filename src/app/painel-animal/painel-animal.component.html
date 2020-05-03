@@ -8,28 +8,25 @@
   {{animal?.dataObito | date: 'dd/MM/yyyy' }}
 </div>
 <br>
-<div *ngIf="listaPeso != null && listaPeso.length > 0">
     
-  <div style="display: block;">
-            <canvas  class="grafico" baseChart 
-                      height=350
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [chartType]="'line'"></canvas>
-  </div>
-  <div class="right-align">
-            <a mz-button  [float]='true' [routerLink]="'/pesar'"  [queryParams]="{ animal: idAnimal }">
-                      <i mz-icon-mdi [align]="'left'" [icon]="'plus'" [size]="'small'"> </i>
-            </a>
-  </div>
-  <mz-collection>
-            <mz-collection-item *ngFor="let item of listaPeso">
-                      Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
-                      <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
-                                <i mz-icon-mdi [icon]="'delete'"></i></a>
-            </mz-collection-item>
-                
-  </mz-collection>
-
+<div style="display: block;" *ngIf="listaPeso != null && listaPeso.length > 0">
+          <canvas  class="grafico" baseChart 
+                    height=350
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"
+                      [chartType]="'line'"></canvas>
 </div>
+<div class="right-align">
+          <a mz-button  [float]='true' [routerLink]="'/pesar'"  [queryParams]="{ animal: idAnimal }">
+                    <i mz-icon-mdi [align]="'left'" [icon]="'plus'" [size]="'small'"> </i>
+          </a>
+</div>
+<mz-collection *ngIf="listaPeso != null && listaPeso.length > 0">
+          <mz-collection-item *ngFor="let item of listaPeso">
+                    Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
+                    <a class="red-text pointer" (click)="excluir(item.id)" mz-secondary-content>
+                              <i mz-icon-mdi [icon]="'delete'"></i></a>
+          </mz-collection-item>
+              
+</mz-collection>
