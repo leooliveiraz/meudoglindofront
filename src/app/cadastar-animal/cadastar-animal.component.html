@@ -1,6 +1,9 @@
 <h1 class="yellow-text text-darken-1 center-align">Cadastrar um Animalzinho!</h1>
 <form #f="ngForm" (ngSubmit)="cadastrar(f)">
   <input type="hidden" [(ngModel)]="id" name='id'>
+  <div class="center-align">
+    <app-image-upload [src]="srcImagem" (trocarImagemEvent)="alterarImagem($event)"></app-image-upload>
+  </div>
   <mz-input-container>
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'dog'">
     </i>

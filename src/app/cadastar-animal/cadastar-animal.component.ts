@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MzToastService } from 'ngx-materialize';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastar-animal',
@@ -37,6 +38,8 @@ export class CadastarAnimalComponent implements OnInit {
     dataNascimento = '';
     dataObito = '';
     declararObito = false;
+    srcImagem = null;
+    imagemAlterada = false;
 
   ngOnInit() {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
@@ -53,6 +56,9 @@ export class CadastarAnimalComponent implements OnInit {
         this.dataNascimento = animal.dataNascimento;
         this.dataObito = animal.dataObito;
         this.declararObito = (this.dataObito != null && animal.dataObito.length > 0);
+        if (animal.idArquivo) {
+          this.srcImagem = `${environment.API_URL}arquivo/${animal.idArquivo}`;
+        }
       });
     }
   }
@@ -62,12 +68,24 @@ export class CadastarAnimalComponent implements OnInit {
       this.animalService.alterar(form.form.value).subscribe(res => {
         this.toastService.show('Os dados do seu bichinho foram atualizados com sucesso!', 1000, 'green');
         this.router.navigateByUrl('/meus-bichinhos');
+        if (this.srcImagem && this.imagemAlterada) {
+          this.animalService.uploadImagem(this.id, this.srcImagem ).subscribe();
+        }
       });
     } else {
       this.animalService.salvar(form.form.value).subscribe(res => {
+        const idAnimal = res;
         this.toastService.show('Salvo com sucesso!', 1000, 'green');
         this.router.navigateByUrl('/meus-bichinhos');
+        if (this.srcImagem && this.imagemAlterada) {
+          this.animalService.uploadImagem(idAnimal, this.srcImagem ).subscribe();
+        }
       });
     }
+  }
+
+  alterarImagem(event) {
+    this.srcImagem = event;
+    this.imagemAlterada = true;
   }
 }

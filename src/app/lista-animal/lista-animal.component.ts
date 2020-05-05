@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { AnimalService } from '../service/animal.service';
 import Swal from 'sweetalert2';
@@ -16,6 +17,7 @@ export class ListaAnimalComponent implements OnInit {
 
   lista: any = [];
   carregando = false;
+  urlImagem = `${environment.API_URL}arquivo/`;
 
 
   ngOnInit() {

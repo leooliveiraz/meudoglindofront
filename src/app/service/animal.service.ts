@@ -19,6 +19,10 @@ export class AnimalService {
     return  this.http.put(`${this.url}`, objeto, { headers: headers });
   }
 
+  uploadImagem(id: any, objeto: any) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return  this.http.put(`${this.url}/uploadImagem/${id}`, objeto, { headers: headers });
+  }
 
   deletar(objeto: number) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');

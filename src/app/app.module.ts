@@ -9,10 +9,11 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { ChartsModule } from 'ng2-charts';
 import { MzSidenavModule, MzDatepickerModule, MzCheckboxModule } from 'ngx-materialize';
 import { MzIconModule, MzIconMdiModule } from 'ngx-materialize';
-import { MzInputModule } from 'ngx-materialize'
+import { MzInputModule } from 'ngx-materialize';
 import { MzNavbarModule } from 'ngx-materialize';
 import { MzButtonModule } from 'ngx-materialize';
 import { MzToastModule } from 'ngx-materialize';
+import { MzModalModule } from 'ngx-materialize';
 import { MzCollectionModule } from 'ngx-materialize';
 import { MzSelectModule } from 'ngx-materialize';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -31,6 +32,9 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImagemAnimalComponent } from './imagem-animal/imagem-animal.component';
 
 
 const config = new AuthServiceConfig([
@@ -57,7 +61,9 @@ export function provideConfig() {
     PainelAnimalComponent,
     LoginGoogleComponent,
     LogoutComponent,
-    SobreComponent
+    SobreComponent,
+    ImageUploadComponent,
+    ImagemAnimalComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +83,9 @@ export function provideConfig() {
     MzToastModule,
     MzSelectModule,
     MzCheckboxModule ,
+    MzModalModule,
     ChartsModule,
+    ImageCropperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],

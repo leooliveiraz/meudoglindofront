@@ -1,4 +1,26 @@
 .pointer :hover{
           cursor: pointer;
 }
-font-size: 20px;
+
+.pointer {
+          vertical-align: super;
+}
+.icone {
+          position: relative !important;
+          top: -24px !important;  
+}
+.img {
+          margin-right: 1em;
+}
+.animal{
+          padding-top: .7em;
+}
+
+::ng-deep .collection .collection-item.avatar {
+          min-height: 60px;
+          padding-left: 72px;
+          position: relative;
+}
+::ng-deep .collection {
+          border: 0px;
+}

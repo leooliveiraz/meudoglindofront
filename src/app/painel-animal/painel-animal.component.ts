@@ -6,6 +6,7 @@ import { Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-painel-animal',
@@ -27,6 +28,8 @@ export class PainelAnimalComponent implements OnInit {
   idAnimal;
   carregando = false;
   animal: any;
+  srcImg = null;
+  tempoDeVida = '';
   listaPeso: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
@@ -66,6 +69,8 @@ export class PainelAnimalComponent implements OnInit {
     this.carregando = true;
     this.animalService.buscar(this.idAnimal).subscribe(res => {
       this.animal = res;
+      this.gerarDataDescritiva(this.animal.dataNascimento, this.animal.dataObito);
+      this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
       if (this.animal == null) {
         Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
         .then(
@@ -113,5 +118,14 @@ export class PainelAnimalComponent implements OnInit {
         });
       }
     });
+  }
+
+  gerarDataDescritiva(dataNascimento, dataFinal){
+
+    if (dataFinal == null) {
+      dataFinal = new Date(); 
+    }
+    let diffTime = Math.abs(dataFinal - dataNascimento);
+    console.log(diffTime)
   }
 }

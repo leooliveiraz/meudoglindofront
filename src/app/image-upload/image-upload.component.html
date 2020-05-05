@@ -1,0 +1,22 @@
+<input type="file" style="visibility: hidden;" (change)="mudar($event)" #img />
+<img [src]="src ? src : srcImage || 'assets/icons/communication.png'" class="circle" (click)="img.click()">
+<button mz-button [float]="true" class="float-button orange accent-3 white-text" (click)="img.click();" type="button">
+  <i mz-icon-mdi [align]="'left'" [icon]="'camera-plus'" [size]="'tiny'"> </i>
+</button>
+
+
+<mz-modal #modal [fixedFooter]="true">
+  <mz-modal-header>
+    <h4>Recortar Imagem</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" 
+          [aspectRatio]="3 / 3"
+          [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" type="button" mz-modal-close (click)="concluirRecorte()">Concluir</button>
+    <button mz-button [flat]="true" type="button" mz-modal-close>Não recortar</button>
+  </mz-modal-footer>
+</mz-modal>

@@ -3,6 +3,8 @@
           max-width: 300px;
           width: 300px;
 }
+
+
 .espaco-telas{
           float: none;
 }
@@ -10,6 +12,19 @@
 .pagina{
           margin-top: 3em;
           margin-left: 1em;
+}
+
+
+@media (min-width: 993px ) {
+  .pagina{
+    padding-left:  4em;
+  }
+}
+
+@media (min-width: 1180px ) {
+  .pagina{
+    padding-left:  1em;
+  }
 }
 
 

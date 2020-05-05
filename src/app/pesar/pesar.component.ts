@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PesoService } from '../service/peso.service';
 import { MzToastService } from 'ngx-materialize';
 import { Router,ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pesar',
@@ -20,6 +21,7 @@ export class PesarComponent implements OnInit {
   idAnimal: number = null;
   peso: number = null;
   dataPesagem = '';
+  urlImagem = `${environment.API_URL}arquivo/979FEB8D61425164740D8D5739758DFDFE945CC59A9BFECB0ED602E13A6303AF`;
 
   listaAnimais:any = [];
 
