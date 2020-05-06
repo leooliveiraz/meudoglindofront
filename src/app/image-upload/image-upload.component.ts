@@ -8,7 +8,7 @@ import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 })
 export class ImageUploadComponent implements OnInit {
   @ViewChild('modal', { static: true }) modal: any;
-  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {static : false}) imageCropper: ImageCropperComponent;
   @Output() trocarImagemEvent = new EventEmitter();
   @Input() src;
 

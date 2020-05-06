@@ -18,6 +18,15 @@ input {
   width: 56px;
   height: 56px;
 }
+::ng-deep .modal{
+  max-height: 90% !important;
+  max-height: 90% !important;
+  top: 05% !important;
+}
+
+.imgCropper{
+  max-height: 24em !important;
+}
 
 @media (max-width: 600px) {
   img {

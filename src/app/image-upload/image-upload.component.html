@@ -5,7 +5,7 @@
 </button>
 
 
-<mz-modal #modal [fixedFooter]="true">
+<mz-modal #modal [fixedFooter]="false" >
   <mz-modal-header>
     <h4>Recortar Imagem</h4>
   </mz-modal-header>
@@ -16,7 +16,9 @@
     <button mz-button [flat]="true" type="button" (click)="rodarDireita()">
       <i mz-icon-mdi [align]="'left'" [icon]="'rotate-right'" [size]="'tiny'"> </i>
     </button>
-    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" #imageCropper
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" 
+          #imageCropper
+          class="imgCropper"
           [aspectRatio]="3 / 3" 
           [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
           (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
