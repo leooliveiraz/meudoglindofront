@@ -69,8 +69,9 @@ export class PainelAnimalComponent implements OnInit {
     this.carregando = true;
     this.animalService.buscar(this.idAnimal).subscribe(res => {
       this.animal = res;
-      this.gerarDataDescritiva(this.animal.dataNascimento, this.animal.dataObito);
-      this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
+      if(this.animal.idArquivo){
+        this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
+      }
       if (this.animal == null) {
         Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
         .then(
@@ -120,12 +121,4 @@ export class PainelAnimalComponent implements OnInit {
     });
   }
 
-  gerarDataDescritiva(dataNascimento, dataFinal){
-
-    if (dataFinal == null) {
-      dataFinal = new Date(); 
-    }
-    let diffTime = Math.abs(dataFinal - dataNascimento);
-    console.log(diffTime)
-  }
 }

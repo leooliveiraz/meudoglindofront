@@ -55,11 +55,11 @@ export class ImageUploadComponent implements OnInit {
     this.trocarImagemEvent.emit(this.srcImage);
   }
 
-  rodarDireita(){
+  rodarDireita() {
     this.imageCropper.rotateRight();
   }
 
-  rodarEsquerda(){
+  rodarEsquerda() {
     this.imageCropper.rotateLeft();
   }
 }
