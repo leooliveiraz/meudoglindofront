@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-image-upload',
@@ -8,6 +8,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 })
 export class ImageUploadComponent implements OnInit {
   @ViewChild('modal', { static: true }) modal: any;
+  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
   @Output() trocarImagemEvent = new EventEmitter();
   @Input() src;
 
@@ -16,7 +17,7 @@ export class ImageUploadComponent implements OnInit {
 
   imageChangedEvent: any = {};
   croppedImage: any = {};
-
+ 
 
   constructor() { }
 
@@ -48,9 +49,17 @@ export class ImageUploadComponent implements OnInit {
     // show message
   }
 
-  concluirRecorte(){
+  concluirRecorte() {
     this.src = null;
     this.srcImage = this.croppedImage;
     this.trocarImagemEvent.emit(this.srcImage);
+  }
+
+  rodarDireita(){
+    this.imageCropper.rotateRight();
+  }
+
+  rodarEsquerda(){
+    this.imageCropper.rotateLeft();
   }
 }
