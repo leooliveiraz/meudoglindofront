@@ -67,18 +67,24 @@ export class CadastarAnimalComponent implements OnInit {
     if ( this.id ) {
       this.animalService.alterar(form.form.value).subscribe(res => {
         this.toastService.show('Os dados do seu bichinho foram atualizados com sucesso!', 1000, 'green');
-        this.router.navigateByUrl('/meus-bichinhos');
         if (this.srcImagem && this.imagemAlterada) {
-          this.animalService.uploadImagem(this.id, this.srcImagem ).subscribe();
+          this.animalService.uploadImagem(this.id, this.srcImagem ).subscribe( () => {
+            this.router.navigateByUrl('/meus-bichinhos');
+          });
+        } else {
+          this.router.navigateByUrl('/meus-bichinhos');
         }
       });
     } else {
       this.animalService.salvar(form.form.value).subscribe(res => {
         const idAnimal = res;
         this.toastService.show('Salvo com sucesso!', 1000, 'green');
-        this.router.navigateByUrl('/meus-bichinhos');
         if (this.srcImagem && this.imagemAlterada) {
-          this.animalService.uploadImagem(idAnimal, this.srcImagem ).subscribe();
+          this.animalService.uploadImagem(idAnimal, this.srcImagem ).subscribe( () => {
+            this.router.navigateByUrl('/meus-bichinhos');
+          });
+        } else {
+          this.router.navigateByUrl('/meus-bichinhos');
         }
       });
     }
