@@ -35,6 +35,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagemAnimalComponent } from './imagem-animal/imagem-animal.component';
+import { VermifugarComponent } from './vermifugar/vermifugar.component';
 
 
 const config = new AuthServiceConfig([
@@ -64,6 +65,7 @@ export function provideConfig() {
     SobreComponent,
     ImageUploadComponent,
     ImagemAnimalComponent,
+    VermifugarComponent,
   ],
   imports: [
     BrowserModule,

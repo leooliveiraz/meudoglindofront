@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
+import { VermifugoService } from '../service/vermifugo.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -18,6 +19,7 @@ export class PainelAnimalComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private pesoService: PesoService,
+    private vermifugoService: VermifugoService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private router: Router
@@ -31,6 +33,7 @@ export class PainelAnimalComponent implements OnInit {
   srcImg = null;
   tempoDeVida = '';
   listaPeso: any = [];
+  listaVermifugo: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
@@ -79,12 +82,21 @@ export class PainelAnimalComponent implements OnInit {
         );
       }
       this.carregarPesos();
+      this.carregarVermifugos();
     }, erro => this.carregando = false);
   }
 
   carregarPesos() {
     this.pesoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaPeso = res;
+      this.carregando = false;
+      this.configurarGrafico();
+    }, erro => this.carregando = false);
+  }
+  
+  carregarVermifugos() {
+    this.vermifugoService.listarPorAnimal(this.idAnimal).subscribe(res => {
+      this.listaVermifugo = res;
       this.carregando = false;
       this.configurarGrafico();
     }, erro => this.carregando = false);
@@ -101,7 +113,7 @@ export class PainelAnimalComponent implements OnInit {
   }
 
   
-  excluir(id) {
+  excluirPeso(id) {
     Swal.fire({
       title: 'Tem certeza?',
       text: 'Ao confirmar essa ação, você concorda em excluir essa pesagem.',
@@ -116,6 +128,27 @@ export class PainelAnimalComponent implements OnInit {
         this.pesoService.deletar(id).subscribe(res => {
           this.toastService.show('Pesagem Excluída!', 1000, 'red');
           this.carregarPesos();
+        });
+      }
+    });
+  }
+
+  excluirVermifugo(id) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Ao confirmar essa ação, você concorda em excluir essa vermifugação.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim'
+    }).then((result) => {
+      if (result.value) {
+        this.vermifugoService.deletar(id).subscribe(res => {
+          this.toastService.show('Vermifugação Excluída!', 1000, 'red');
+          this.carregarPesos();
+          this.carregarVermifugos();
         });
       }
     });

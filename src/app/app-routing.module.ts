@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { AuthGuardService } from './service/auth/auth-guard.service';
+import { VermifugarComponent } from './vermifugar/vermifugar.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'meus-bichinhos', component: ListaAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'painel/:idAnimal', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
+  { path: 'vermifugar', component: VermifugarComponent, canActivate: [AuthGuardService] },
   { path: 'sobre', component: SobreComponent },
 ];
 

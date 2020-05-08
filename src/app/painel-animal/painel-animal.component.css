@@ -15,3 +15,10 @@ h1 {
 .info{
   font-size: 18px;
 }
+
+.no-padding{
+  padding: 0px;
+}
+.no-margin-bottom{
+  margin-bottom: 5px !important;
+}
