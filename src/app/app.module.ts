@@ -36,6 +36,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagemAnimalComponent } from './imagem-animal/imagem-animal.component';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
+import { VacinaComponent } from './vacina/vacina.component';
 
 
 const config = new AuthServiceConfig([
@@ -66,6 +67,7 @@ export function provideConfig() {
     ImageUploadComponent,
     ImagemAnimalComponent,
     VermifugarComponent,
+    VacinaComponent,
   ],
   imports: [
     BrowserModule,

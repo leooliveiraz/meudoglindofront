@@ -1,21 +1,20 @@
 import { AnimalService } from './../service/animal.service';
 import { Component, OnInit } from '@angular/core';
-import { PesoService } from '../service/peso.service';
 import { MzToastService } from 'ngx-materialize';
 import { Router, ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { VermifugoService } from '../service/vermifugo.service';
+import { VacinaService } from '../service/vacina.service';
+
 
 @Component({
-  selector: 'app-vermifugar',
-  templateUrl: './vermifugar.component.html',
-  styleUrls: ['./vermifugar.component.css']
+  selector: 'app-vacina',
+  templateUrl: './vacina.component.html',
+  styleUrls: ['./vacina.component.css']
 })
-export class VermifugarComponent implements OnInit {
+export class VacinaComponent implements OnInit {
 
   constructor(
     private animalService: AnimalService,
-    private vermifugoService: VermifugoService,
+    private vacinaService: VacinaService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -23,9 +22,8 @@ export class VermifugarComponent implements OnInit {
   
   idAnimal: number = null;
   nome = null;
-  dataVermifugo = '';
-  dataProximoVermifugo = '';
-  urlImagem = `${environment.API_URL}arquivo/979FEB8D61425164740D8D5739758DFDFE945CC59A9BFECB0ED602E13A6303AF`;
+  dataVacina = '';
+  dataProximaVacina = '';
 
   listaAnimais: any = [];
 
@@ -57,7 +55,7 @@ export class VermifugarComponent implements OnInit {
     const pesagem: any = f.form.value;
     pesagem.peso = parseFloat(pesagem.peso);
 
-    this.vermifugoService.salvar(pesagem).subscribe(res => {
+    this.vacinaService.salvar(pesagem).subscribe(res => {
       this.toastService.show('A vermifugação foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
     });

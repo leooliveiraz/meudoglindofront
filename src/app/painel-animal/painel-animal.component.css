@@ -1,6 +1,6 @@
 .grafico {
   background-color: white;
-  margin-bottom: 10px;
+  margin-bottom: 2em;
 }
 
 @media only screen and (max-width: 920px) {
@@ -21,4 +21,8 @@ h1 {
 }
 .no-margin-bottom{
   margin-bottom: 5px !important;
+}
+
+hr{
+  border: .5px solid #d500f9 !important;
 }

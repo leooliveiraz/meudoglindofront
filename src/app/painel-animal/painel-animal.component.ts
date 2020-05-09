@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
+import { VacinaService } from '../service/vacina.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -20,6 +21,7 @@ export class PainelAnimalComponent implements OnInit {
     private animalService: AnimalService,
     private pesoService: PesoService,
     private vermifugoService: VermifugoService,
+    private vacinaService: VacinaService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private router: Router
@@ -34,6 +36,7 @@ export class PainelAnimalComponent implements OnInit {
   tempoDeVida = '';
   listaPeso: any = [];
   listaVermifugo: any = [];
+  listaVacina: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
@@ -58,7 +61,7 @@ export class PainelAnimalComponent implements OnInit {
           id: 'y-axis-0',
           position: 'left',
         },
-       
+
       ]
     }
   };
@@ -72,7 +75,7 @@ export class PainelAnimalComponent implements OnInit {
     this.carregando = true;
     this.animalService.buscar(this.idAnimal).subscribe(res => {
       this.animal = res;
-      if(this.animal.idArquivo){
+      if (this.animal.idArquivo) {
         this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
       }
       if (this.animal == null) {
@@ -83,6 +86,7 @@ export class PainelAnimalComponent implements OnInit {
       }
       this.carregarPesos();
       this.carregarVermifugos();
+      this.carregarVacinas();
     }, erro => this.carregando = false);
   }
 
@@ -93,7 +97,7 @@ export class PainelAnimalComponent implements OnInit {
       this.configurarGrafico();
     }, erro => this.carregando = false);
   }
-  
+
   carregarVermifugos() {
     this.vermifugoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaVermifugo = res;
@@ -102,7 +106,15 @@ export class PainelAnimalComponent implements OnInit {
     }, erro => this.carregando = false);
   }
 
-  configurarGrafico(){
+  carregarVacinas() {
+    this.vacinaService.listarPorAnimal(this.idAnimal).subscribe(res => {
+      this.listaVacina = res;
+      this.carregando = false;
+      this.configurarGrafico();
+    }, erro => this.carregando = false);
+  }
+
+  configurarGrafico() {
     this.lineChartData[0].label = this.animal.nome;
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
@@ -112,7 +124,7 @@ export class PainelAnimalComponent implements OnInit {
     }
   }
 
-  
+
   excluirPeso(id) {
     Swal.fire({
       title: 'Tem certeza?',
@@ -147,8 +159,27 @@ export class PainelAnimalComponent implements OnInit {
       if (result.value) {
         this.vermifugoService.deletar(id).subscribe(res => {
           this.toastService.show('Vermifugação Excluída!', 1000, 'red');
-          this.carregarPesos();
           this.carregarVermifugos();
+        });
+      }
+    });
+  }
+
+  excluirVacina(id) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Ao confirmar essa ação, você concorda em excluir essa vermifugação.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim'
+    }).then((result) => {
+      if (result.value) {
+        this.vermifugoService.deletar(id).subscribe(res => {
+          this.toastService.show('Vacina Excluída!', 1000, 'red');
+          this.carregarVacinas();
         });
       }
     });

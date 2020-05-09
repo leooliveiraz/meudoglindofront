@@ -11,14 +11,16 @@
       <h4 [routerLink]="['/']" (click)="fecharMenu()">Meu Pet Lindo</h4>
     </div>
   </mz-sidenav-header>
-  <mz-sidenav-link class="center-align" *ngIf="estaLogado">
+  <mz-sidenav-link class="left-align" *ngIf="estaLogado">
     <a [routerLink]="['/meus-bichinhos']" routerLinkActive="active" (click)="fecharMenu()">Meus Bichinhos</a>
     <a [routerLink]="['/cadastrar']" routerLinkActive="active" (click)="fecharMenu()" >Adicionar um Animalzinho</a>
-    <a [routerLink]="['/pesar']" routerLinkActive="active" (click)="fecharMenu()"  >Pesar meu Bichinho</a>
+    <a [routerLink]="['/vacinar']" routerLinkActive="active" (click)="fecharMenu()"  >Vacinar meu Bichinho</a>
     <a [routerLink]="['/vermifugar']" routerLinkActive="active" (click)="fecharMenu()"  >Vermifugar meu Bichinho</a>
+    <a [routerLink]="['/pesar']" routerLinkActive="active" (click)="fecharMenu()"  >Pesar meu Bichinho</a>
   </mz-sidenav-link>
-  <mz-sidenav-link class="center-align">
+  <mz-sidenav-link class="left-align">
     <a [routerLink]="['/sobre']" routerLinkActive="active" (click)="fecharMenu()">Sobre</a>
   </mz-sidenav-link>
+  <br>
   <app-logout *ngIf="estaLogado"></app-logout>
 </mz-sidenav>

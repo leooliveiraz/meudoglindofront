@@ -8,6 +8,7 @@ import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
+import { VacinaComponent } from './vacina/vacina.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'painel/:idAnimal', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
   { path: 'vermifugar', component: VermifugarComponent, canActivate: [AuthGuardService] },
+  { path: 'vacinar', component: VacinaComponent, canActivate: [AuthGuardService] },
   { path: 'sobre', component: SobreComponent },
 ];
 
