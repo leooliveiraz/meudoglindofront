@@ -177,7 +177,7 @@ export class PainelAnimalComponent implements OnInit {
       confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
-        this.vermifugoService.deletar(id).subscribe(res => {
+        this.vacinaService.deletar(id).subscribe(res => {
           this.toastService.show('Vacina Excluída!', 1000, 'red');
           this.carregarVacinas();
         });
