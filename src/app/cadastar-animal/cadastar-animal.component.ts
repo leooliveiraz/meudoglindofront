@@ -36,6 +36,7 @@ export class CadastarAnimalComponent implements OnInit {
     id = null;
     nome = '';
     dataNascimento = '';
+    dataAdocao = '';
     dataObito = '';
     declararObito = false;
     srcImagem = null;
@@ -54,6 +55,7 @@ export class CadastarAnimalComponent implements OnInit {
         }
         this.nome = animal.nome;
         this.dataNascimento = animal.dataNascimento;
+        this.dataObito = animal.dataAdocao;
         this.dataObito = animal.dataObito;
         this.declararObito = (this.dataObito != null && animal.dataObito.length > 0);
         if (animal.idArquivo) {

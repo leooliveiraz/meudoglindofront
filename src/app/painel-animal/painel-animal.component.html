@@ -1,10 +1,14 @@
 <app-imagem-animal [src]="srcImg"></app-imagem-animal>
 <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
-<div class="yellow-text text-darken-1 center-align info">
-  <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'"></i>
+<div class="yellow-text text-darken-1 center-align info" id="data-nascimento">
+  <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'" ></i>
   {{animal?.dataNascimento | date: 'dd/MM/yyyy' }}
 </div>
-<div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataObito">
+<div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataAdocao"  id="data-adocao">
+  <i mz-icon-mdi [align]="'center'" [icon]="'home-heart'" [size]="'large'" ></i>
+  {{animal?.dataAdocao | date: 'dd/MM/yyyy' }}
+</div>
+<div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataObito" id="data-obito">
   <i mz-icon-mdi [align]="'center'" [icon]="'star'" [size]="'large'"></i>
   {{animal?.dataObito | date: 'dd/MM/yyyy' }}
 </div>

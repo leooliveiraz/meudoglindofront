@@ -22,7 +22,7 @@ import { CadastarAnimalComponent } from './cadastar-animal/cadastar-animal.compo
 import { ListaAnimalComponent } from './lista-animal/lista-animal.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientJsonpModule } from '@angular/common/http';
 import { PesarComponent } from './pesar/pesar.component';
 import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { LoginGoogleComponent } from './login-google/login-google.component';
@@ -74,6 +74,7 @@ export function provideConfig() {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     SocialLoginModule,
     BrowserAnimationsModule,
     MzSidenavModule,

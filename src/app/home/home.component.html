@@ -2,9 +2,17 @@
           <h1 class="yellow-text center-align"> Bem-Vindo! </h1>
           
           <h3 class="yellow-text text-accent-3 center-align"> 
-                    Este App foi feito exclusivamente para você registrar o peso do seu bichinho! 
+                    Este App foi feito exclusivamente para você registrar informações do seu bichinho! 
           </h3>
-          
+
+          <br>
+          <div class="center-align" *ngIf="estaLogado">
+                    <button mz-button  class="purple accent-2" [routerLink]="['/meus-bichinhos']" >
+                              Clique aqui para iniciar!
+                    </button>
+          </div>
+                  
+
 </div>
 
 <app-login-google *ngIf="!estaLogado"></app-login-google>

@@ -25,5 +25,18 @@
         ]
       }
     }
+  ], "dataGroups": [
+    {
+      "name": "meu-pet-lindo",
+      "urls": [
+        "http://localhost:8080/*"
+      ],
+      "cacheConfig":{
+        "strategy": "performance",
+        "maxSize": 10000,
+        "maxAge": "1h",
+        "timeout": "5s"
+      }
+    }
   ]
 }

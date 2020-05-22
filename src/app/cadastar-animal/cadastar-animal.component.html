@@ -21,6 +21,14 @@
       [options]="options" id="datepicker" type="text">
   </mz-input-container>
 
+  <mz-input-container>
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar-heart'">
+    </i>
+    <input mz-datepicker [(ngModel)]="dataAdocao" 
+      name="dataAdocao" class="white-text" [label]="'Desde de quando esse bicinho está com você?'"
+      [options]="options" id="datepickerAdocao" type="text">
+  </mz-input-container>
+
   <mz-checkbox-container>
     <input mz-checkbox [(ngModel)]="declararObito" 
       name="declararObito"
