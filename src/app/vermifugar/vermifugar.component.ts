@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
+import { OnlineOfflineService } from '../service/online-offline.service';
 
 @Component({
   selector: 'app-vermifugar',
@@ -20,7 +21,8 @@ export class VermifugarComponent implements OnInit {
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private sync: SincronizacaoService
+    private sync: SincronizacaoService,
+    private onOffService: OnlineOfflineService
   ) { }
   
   idAnimal: number = null;
@@ -77,11 +79,15 @@ export class VermifugarComponent implements OnInit {
   }
 
   carregarAnimais() {
-    this.animalService.listar().subscribe(res => {
-      this.listaAnimais = res;
-    }, erro => {
+    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+      this.animalService.listar().subscribe(res => {
+        this.listaAnimais = res;
+      }, erro => {
+        this.listaAnimais = this.sync.getTodosAnimais();
+      });
+    } else {
       this.listaAnimais = this.sync.getTodosAnimais();
-    });
+    }
   }
 
 }

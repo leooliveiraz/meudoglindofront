@@ -25,7 +25,7 @@ export class OnlineOfflineService {
     return  this.http.get(`${this.urlStatusServidor}`, { headers: headers }).subscribe(res => {
       this.statusServidor = true;
     }, erro => {
-      this.statusServidor = false;
+      this.statusServidor = false ;
     });
   }
 

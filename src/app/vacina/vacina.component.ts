@@ -4,6 +4,7 @@ import { MzToastService } from 'ngx-materialize';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
+import { OnlineOfflineService } from '../service/online-offline.service';
 
 
 @Component({
@@ -20,8 +21,9 @@ export class VacinaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private sync: SincronizacaoService,
     private router: Router,
+    private onOffService: OnlineOfflineService
   ) { }
-  
+
   idAnimal: number = null;
   nome = null;
   dataVacina = '';
@@ -29,21 +31,21 @@ export class VacinaComponent implements OnInit {
 
   listaAnimais: any = [];
 
-  diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
-    mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' , 'Dezembro' ];
-    public options: Pickadate.DateOptions = {
-      format: 'dd/mm/yyyy',
-      formatSubmit: 'yyyy-mm-dd',
-      monthsFull: this.mesAno,
-      monthsShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-      weekdaysFull: this.diaSemana,
-      weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab' ],
-      weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-      selectMonths: true,
-      selectYears: true,
-      clear: 'Limpar',
-      today: 'Hoje'
-    };
+  diaSemana = ['Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'];
+  mesAno = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  public options: Pickadate.DateOptions = {
+    format: 'dd/mm/yyyy',
+    formatSubmit: 'yyyy-mm-dd',
+    monthsFull: this.mesAno,
+    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    weekdaysFull: this.diaSemana,
+    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+    selectMonths: true,
+    selectYears: true,
+    clear: 'Limpar',
+    today: 'Hoje'
+  };
 
   ngOnInit() {
     const animal = this.activatedRoute.snapshot.queryParamMap.get('animal');
@@ -67,7 +69,7 @@ export class VacinaComponent implements OnInit {
       } else {
         listaVacinas = [];
         listaVacinas.push(vacinacao);
-      }      
+      }
       localStorage.setItem('vacinas', JSON.stringify(listaVacinas));
       localStorage.setItem('syncStatus', 'upload');
       this.toastService.show('O registro de Vacina foi adicionada nas informações do seu bichinho!', 1000, 'green');
@@ -76,11 +78,15 @@ export class VacinaComponent implements OnInit {
   }
 
   carregarAnimais() {
-    this.animalService.listar().subscribe(res => {
-      this.listaAnimais = res;
-    }, erro => {
+    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+      this.animalService.listar().subscribe(res => {
+        this.listaAnimais = res;
+      }, erro => {
+        this.listaAnimais = this.sync.getTodosAnimais();
+      });
+    } else {
       this.listaAnimais = this.sync.getTodosAnimais();
-    });
+    }
   }
 
 }

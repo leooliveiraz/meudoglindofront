@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
+import { OnlineOfflineService } from '../service/online-offline.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -26,7 +27,8 @@ export class PainelAnimalComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private sync: SincronizacaoService,
-    private router: Router
+    private router: Router,
+    private onOffService: OnlineOfflineService
   ) {
     this.innerWidth = window.innerWidth;
    }
@@ -75,24 +77,28 @@ export class PainelAnimalComponent implements OnInit {
 
   carregarAnimal() {
     this.carregando = true;
-    this.animalService.buscar(this.idAnimal).subscribe(res => {
-      this.animal = res;
-      if (this.animal.idArquivo) {
-        this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
-      }
-      if (this.animal == null) {
-        Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
-        .then(
-          () => this.router.navigateByUrl('/meus-bichinhos')
-        );
-      }
-      this.carregarPesos();
-      this.carregarVermifugos();
-      this.carregarVacinas();
-    }, erro => {
+    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+      this.animalService.buscar(this.idAnimal).subscribe(res => {
+        this.animal = res;
+        if (this.animal.idArquivo) {
+          this.srcImg = `${environment.API_URL}arquivo/${this.animal.idArquivo}`;
+        }
+        if (this.animal == null) {
+          Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
+          .then(
+            () => this.router.navigateByUrl('/meus-bichinhos')
+          );
+        }
+        this.carregarPesos();
+        this.carregarVermifugos();
+        this.carregarVacinas();
+      }, erro => {
+        this.carregarOffline();
+        this.carregando = false;
+      });
+    } else {
       this.carregarOffline();
-      this.carregando = false;
-    });
+    }
   }
 
   carregarOffline() {
@@ -101,6 +107,7 @@ export class PainelAnimalComponent implements OnInit {
     this.listaVermifugo = this.sync.getVermifugos(this.idAnimal);
     this.listaVacina = this.sync.getVacinas(this.idAnimal);
     this.configurarGrafico();
+    this.carregando = false;
   }
 
   carregarPesos() {
@@ -114,7 +121,6 @@ export class PainelAnimalComponent implements OnInit {
   carregarVermifugos() {
     this.vermifugoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaVermifugo = res;
-      this.carregando = false;
       this.configurarGrafico();
     }, erro => this.carregando = false);
   }

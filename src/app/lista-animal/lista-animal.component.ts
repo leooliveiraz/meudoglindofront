@@ -4,6 +4,7 @@ import { AnimalService } from '../service/animal.service';
 import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
 import { SincronizacaoService } from '../service/sincronizacao.service';
+import { OnlineOfflineService } from '../service/online-offline.service';
 
 @Component({
   selector: 'app-lista-animal',
@@ -15,7 +16,8 @@ export class ListaAnimalComponent implements OnInit {
   constructor(
     private service: AnimalService,
     private toastService: MzToastService,
-    private sync: SincronizacaoService) { }
+    private sync: SincronizacaoService,
+    private onOffService: OnlineOfflineService) { }
 
   lista: any = [];
   carregando = false;
@@ -38,12 +40,16 @@ export class ListaAnimalComponent implements OnInit {
       confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
-        this.service.deletar(id).subscribe(res => {
-          this.toastService.show('Animalzinho Excluído!', 1000, 'red');
-          this.carregar();
-        }, erro => {
+        if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+          this.service.deletar(id).subscribe(res => {
+            this.toastService.show('Animalzinho Excluído!', 1000, 'red');
+            this.carregar();
+          }, erro => {
+            this.excluirOffline(id);
+          });
+        } else {
           this.excluirOffline(id);
-        });
+        }
       }
     });
   }
@@ -51,25 +57,31 @@ export class ListaAnimalComponent implements OnInit {
   excluirOffline(id) {
     this.sync.excluirAnimal(id);
     const animais: any = JSON.parse(localStorage.getItem('animais'));
-    const index = animais.findIndex(a => a.id == id );
+    const index = animais.findIndex(a => a.id == id);
     animais.splice(index, 1);
-    const indexLista = this.lista.findIndex(a => a.id == id );
+    const indexLista = this.lista.findIndex(a => a.id == id);
     this.lista.splice(indexLista, 1);
     localStorage.setItem('animais', JSON.stringify(animais));
   }
 
   carregar() {
     this.carregando = true;
-    this.service.listar().subscribe(res => {
-      this.lista = res;
-      this.carregando = false;
-    }, erro => {
-      const animais = localStorage.getItem('animais');
-      if (animais) {
-        this.lista = JSON.parse(animais);
-      }
-      this.carregando = false;
-    });
+    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+      this.service.listar().subscribe(res => {
+        this.lista = res;
+        this.carregando = false;
+      }, erro => {
+        this.carregarOffline();
+      });
+    } else {
+      this.carregarOffline();
+    }
   }
-
+  carregarOffline() {
+    const animais = localStorage.getItem('animais');
+    if (animais) {
+      this.lista = JSON.parse(animais);
+    }
+    this.carregando = false;
+  }
 }
