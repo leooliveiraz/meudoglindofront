@@ -36,4 +36,9 @@ export class VacinaService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     return  this.http.get(`${this.url}/animal/${objeto}`, { headers: headers });
   }
+  
+  listar() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return  this.http.get(`${this.url}`, { headers: headers });
+  }
 }

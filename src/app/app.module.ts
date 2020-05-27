@@ -93,7 +93,6 @@ export function provideConfig() {
     ChartsModule,
     ImageCropperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

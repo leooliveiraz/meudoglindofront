@@ -4,6 +4,7 @@ import { PesoService } from '../service/peso.service';
 import { MzToastService } from 'ngx-materialize';
 import { Router,ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { SincronizacaoService } from '../service/sincronizacao.service';
 
 @Component({
   selector: 'app-pesar',
@@ -16,6 +17,7 @@ export class PesarComponent implements OnInit {
     private pesoService: PesoService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
+    private sync: SincronizacaoService,
     private router: Router,
   ) { }
   idAnimal: number = null;
@@ -40,11 +42,11 @@ export class PesarComponent implements OnInit {
       clear: 'Limpar',
       today: 'Hoje'
     };
-  
-  ngOnInit() {    
+
+  ngOnInit() {
     let animal = this.activatedRoute.snapshot.queryParamMap.get('animal');
-    if(animal){
-      this.idAnimal = parseInt(animal); ;
+    if (animal) {
+      this.idAnimal = parseInt(animal);
     }
     this.carregarAnimais();
   }
@@ -56,12 +58,27 @@ export class PesarComponent implements OnInit {
     this.pesoService.salvar(pesagem).subscribe(res => {
       this.toastService.show('A pesagem foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
+    }, erro => {
+      pesagem.id = this.sync.getIndiceNegativo();
+      let listaPeso = this.sync.getTodosPesos();
+      if (listaPeso) {
+        listaPeso.push(pesagem);
+      } else {
+        listaPeso = [];
+        listaPeso.push(pesagem);
+      }
+      localStorage.setItem('pesos', JSON.stringify(listaPeso));
+      localStorage.setItem('syncStatus', 'upload');
+      this.toastService.show('A pesagem foi adicionada nas informações do seu bichinho!', 1000, 'green');
+      this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
     });
   }
 
   carregarAnimais() {
     this.animalService.listar().subscribe(res => {
       this.listaAnimais = res;
-    });
+    }, erro => {
+      this.listaAnimais = this.sync.getTodosAnimais();
+    })
   }
 }

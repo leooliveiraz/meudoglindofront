@@ -11,7 +11,9 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }, {
@@ -32,7 +34,7 @@
         "http://localhost:8080/*"
       ],
       "cacheConfig":{
-        "strategy": "performance",
+        "strategy": "freshness",
         "maxSize": 10000,
         "maxAge": "1h",
         "timeout": "5s"

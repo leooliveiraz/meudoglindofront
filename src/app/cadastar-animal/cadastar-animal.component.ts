@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MzToastService } from 'ngx-materialize';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { SincronizacaoService } from '../service/sincronizacao.service';
 
 @Component({
   selector: 'app-cadastar-animal',
@@ -11,12 +12,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./cadastar-animal.component.css']
 })
 export class CadastarAnimalComponent implements OnInit {
-  
+
   constructor(private animalService: AnimalService,
-    private toastService: MzToastService,
-    private router: Router,
-    private activateRoute: ActivatedRoute, ) { }
-    
+              private toastService: MzToastService,
+              private router: Router,
+              private activateRoute: ActivatedRoute,
+              private sync: SincronizacaoService ) { }
+
     diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
     mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' , 'Dezembro' ];
     public options: Pickadate.DateOptions = {
@@ -32,7 +34,7 @@ export class CadastarAnimalComponent implements OnInit {
       clear: 'Limpar',
       today: 'Hoje'
     };
-  
+
     id = null;
     nome = '';
     dataNascimento = '';
@@ -47,21 +49,34 @@ export class CadastarAnimalComponent implements OnInit {
     if (this.id != null) {
       this.animalService.buscar(this.id).subscribe(res => {
         const animal: any = res;
-        if (animal == null) {
-          Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
-          .then(
-            () => this.router.navigateByUrl('/meus-bichinhos')
-          );
-        }
-        this.nome = animal.nome;
-        this.dataNascimento = animal.dataNascimento;
-        this.dataObito = animal.dataAdocao;
-        this.dataObito = animal.dataObito;
-        this.declararObito = (this.dataObito != null && animal.dataObito.length > 0);
-        if (animal.idArquivo) {
-          this.srcImagem = `${environment.API_URL}arquivo/${animal.idArquivo}`;
-        }
+        this.configurar(animal, true);
+      }, erro => {
+        const animal = this.sync.getAnimal(this.id);
+        this.configurar(animal, false);
       });
+    }
+  }
+
+  private configurar(animal, online) {
+    if (animal == null) {
+      Swal.fire('Desculpe, não conseguimos encontrar o registro do seu bichinho.', '', 'warning')
+      .then(
+        () => this.router.navigateByUrl('/meus-bichinhos')
+      );
+    }
+    this.nome = animal.nome;
+    this.dataNascimento = animal.dataNascimento;
+    this.dataAdocao = animal.dataAdocao;
+    this.dataObito = animal.dataObito;
+    this.declararObito = (this.dataObito != null && animal.dataObito.length > 0);
+    if (online) {
+      if (animal.idArquivo) {
+        this.srcImagem = `${environment.API_URL}arquivo/${animal.idArquivo}`;
+      }
+    } else {
+      if (animal.srcImg) {
+        this.srcImagem = animal.srcImg;
+      }
     }
   }
 
@@ -76,6 +91,8 @@ export class CadastarAnimalComponent implements OnInit {
         } else {
           this.router.navigateByUrl('/meus-bichinhos');
         }
+      }, error => {
+        this.salvarOffline(form);
       });
     } else {
       this.animalService.salvar(form.form.value).subscribe(res => {
@@ -88,8 +105,35 @@ export class CadastarAnimalComponent implements OnInit {
         } else {
           this.router.navigateByUrl('/meus-bichinhos');
         }
+      }, erro => {
+        this.salvarOffline(form);
       });
     }
+  }
+  salvarOffline(form) {
+    const registro = form.form.value;
+    if (!registro.id) {
+      registro.id = this.sync.getIndiceNegativo();
+    }
+    if (this.srcImagem && this.imagemAlterada) {
+      registro.srcImg = this.srcImagem;
+      registro.imagemAlterada = true;
+    }
+    const listaAnimais = JSON.parse(localStorage.getItem('animais'));
+    let registroEncontrado = false;
+    for (let i = 0 ; i < listaAnimais.length ; i++) {
+      if (listaAnimais[i].id == registro.id) {
+        listaAnimais[i] = registro;
+        registroEncontrado = true;
+      }
+    }
+    if (!registroEncontrado) {
+      listaAnimais.push(registro);
+    }
+    localStorage.setItem('animais', JSON.stringify(listaAnimais));
+    localStorage.setItem('syncStatus', 'upload');
+    this.toastService.show('Salvo com sucesso!', 1000, 'green');
+    this.router.navigateByUrl('/meus-bichinhos');
   }
 
   alterarImagem(event) {

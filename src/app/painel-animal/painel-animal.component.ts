@@ -9,6 +9,7 @@ import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import { VacinaService } from '../service/vacina.service';
+import { SincronizacaoService } from '../service/sincronizacao.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -24,6 +25,7 @@ export class PainelAnimalComponent implements OnInit {
     private vacinaService: VacinaService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
+    private sync: SincronizacaoService,
     private router: Router
   ) {
     this.innerWidth = window.innerWidth;
@@ -87,7 +89,18 @@ export class PainelAnimalComponent implements OnInit {
       this.carregarPesos();
       this.carregarVermifugos();
       this.carregarVacinas();
-    }, erro => this.carregando = false);
+    }, erro => {
+      this.carregarOffline();
+      this.carregando = false;
+    });
+  }
+
+  carregarOffline() {
+    this.animal = this.sync.getAnimal(this.idAnimal);
+    this.listaPeso = this.sync.getPesos(this.idAnimal);
+    this.listaVermifugo = this.sync.getVermifugos(this.idAnimal);
+    this.listaVacina = this.sync.getVacinas(this.idAnimal);
+    this.configurarGrafico();
   }
 
   carregarPesos() {
@@ -140,6 +153,8 @@ export class PainelAnimalComponent implements OnInit {
         this.pesoService.deletar(id).subscribe(res => {
           this.toastService.show('Pesagem Excluída!', 1000, 'red');
           this.carregarPesos();
+        }, erro => {
+          this.excluirPesoOffline(id);
         });
       }
     });
@@ -160,6 +175,8 @@ export class PainelAnimalComponent implements OnInit {
         this.vermifugoService.deletar(id).subscribe(res => {
           this.toastService.show('Vermifugação Excluída!', 1000, 'red');
           this.carregarVermifugos();
+        }, erro => {
+          this.excluirVermifugoOffline(id);
         });
       }
     });
@@ -168,7 +185,7 @@ export class PainelAnimalComponent implements OnInit {
   excluirVacina(id) {
     Swal.fire({
       title: 'Tem certeza?',
-      text: 'Ao confirmar essa ação, você concorda em excluir essa vermifugação.',
+      text: 'Ao confirmar essa ação, você concorda em excluir essa vacina.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -180,9 +197,46 @@ export class PainelAnimalComponent implements OnInit {
         this.vacinaService.deletar(id).subscribe(res => {
           this.toastService.show('Vacina Excluída!', 1000, 'red');
           this.carregarVacinas();
+        }, erro => {
+          this.excluirVacinaOffline(id);
         });
       }
     });
+  }
+
+  
+  excluirPesoOffline(id) {
+    this.sync.excluirPeso(id);
+    const pesos: any = JSON.parse(localStorage.getItem('pesos'));
+    const index = pesos.findIndex(a => a.id == id );
+    pesos.splice(index, 1);
+    const indexLista = this.listaPeso.findIndex(a => a.id == id );
+    this.listaPeso.splice(indexLista, 1);
+    this.configurarGrafico();
+    localStorage.setItem('pesos', JSON.stringify(pesos));
+    localStorage.setItem('syncStatus', 'update');
+  }
+  
+  excluirVermifugoOffline(id) {
+    this.sync.excluirVermifugo(id);
+    const vermifugos: any = JSON.parse(localStorage.getItem('vermifugos'));
+    const index = vermifugos.findIndex(a => a.id == id );
+    vermifugos.splice(index, 1);
+    const indexLista = this.listaVermifugo.findIndex(a => a.id == id );
+    this.listaVermifugo.splice(indexLista, 1);
+    localStorage.setItem('vermifugos', JSON.stringify(vermifugos));
+    localStorage.setItem('syncStatus', 'update');
+  }
+  
+  excluirVacinaOffline(id) {
+    this.sync.excluirVacina(id);
+    const vacinas: any = JSON.parse(localStorage.getItem('vacinas'));
+    const index = vacinas.findIndex(a => a.id == id );
+    vacinas.splice(index, 1);
+    const indexLista = this.listaVacina.findIndex(a => a.id == id );
+    this.listaVacina.splice(indexLista, 1);
+    localStorage.setItem('vacinas', JSON.stringify(vacinas));
+    localStorage.setItem('syncStatus', 'update');
   }
 
 }

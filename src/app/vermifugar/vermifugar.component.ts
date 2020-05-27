@@ -5,6 +5,7 @@ import { MzToastService } from 'ngx-materialize';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
+import { SincronizacaoService } from '../service/sincronizacao.service';
 
 @Component({
   selector: 'app-vermifugar',
@@ -19,6 +20,7 @@ export class VermifugarComponent implements OnInit {
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private sync: SincronizacaoService
   ) { }
   
   idAnimal: number = null;
@@ -54,18 +56,31 @@ export class VermifugarComponent implements OnInit {
   }
 
   cadastrar(f: any) {
-    const pesagem: any = f.form.value;
-    pesagem.peso = parseFloat(pesagem.peso);
-
-    this.vermifugoService.salvar(pesagem).subscribe(res => {
+    const vermifugacao: any = f.form.value;
+    this.vermifugoService.salvar(vermifugacao).subscribe(res => {
       this.toastService.show('A vermifugação foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
+      this.router.navigateByUrl(`/painel/${vermifugacao.idAnimal}`);
+    }, erro => {
+      vermifugacao.id = this.sync.getIndiceNegativo();
+      let listaVermifugacao = this.sync.getTodosVermifugos();
+      if (listaVermifugacao) {
+        listaVermifugacao.push(vermifugacao);
+      } else {
+        listaVermifugacao = [];
+        listaVermifugacao.push(vermifugacao);
+      }
+      localStorage.setItem('vermifugos', JSON.stringify(listaVermifugacao));
+      localStorage.setItem('syncStatus', 'upload');
+      this.toastService.show('A vermifugação foi adicionada nas informações do seu bichinho!', 1000, 'green');
+      this.router.navigateByUrl(`/painel/${vermifugacao.idAnimal}`);
     });
   }
 
   carregarAnimais() {
     this.animalService.listar().subscribe(res => {
       this.listaAnimais = res;
+    }, erro => {
+      this.listaAnimais = this.sync.getTodosAnimais();
     });
   }
 

@@ -1,8 +1,9 @@
+import { SincronizacaoService } from './service/sincronizacao.service';
 import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, NavigationEnd, NavigationError, Router, Event } from '@angular/router';
 import { AuthorizationService } from './service/auth.service';
-import { SwUpdate, SwPush,  } from '@angular/service-worker';
+import { SwUpdate, SwPush, } from '@angular/service-worker';
 import { OnlineOfflineService } from './service/online-offline.service';
 import { MzToastService } from 'ngx-materialize';
 import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
@@ -18,41 +19,50 @@ export class AppComponent implements OnInit {
   title = 'MeuDogLindo';
   estaLogado = false;
   constructor(private router: Router,
-              private authService: AuthorizationService,
-              private toastService: MzToastService,
-              private swUpdate: SwUpdate,
-              private swPush: SwPush,
-              private onOffService: OnlineOfflineService,
-              private appService: AppService,
-              private _pushNotificationService: PushNotificationService) {
-    this.onOffService.statusConexao().subscribe(online => {
-      if ( online ) {
+    private authService: AuthorizationService,
+    private toastService: MzToastService,
+    private swUpdate: SwUpdate,
+    private onOffService: OnlineOfflineService,
+    private sincronizacaoService: SincronizacaoService,
+    private _pushNotificationService: PushNotificationService) {
+
+    this.onOffService.statusConexaoDispositivo().subscribe(online => {
+      if (online) {
         this.toastService.show('Aplicação Online.', 500, 'green');
       } else {
         this.toastService.show('Sem conexão com a internet no momento.', 1000, 'red');
       }
     });
+
     this.router.events.subscribe((event: Event) => {
-        if (event instanceof NavigationStart) {
+      if (event instanceof NavigationEnd) {
+        this.estaLogado = this.authService.estaLogado();
+        if (this.estaLogado) {
+          this.sincronizacaoService.syncPull();
         }
-
-        if (event instanceof NavigationEnd) {
-          this.estaLogado = this.authService.estaLogado();
-        }
-
-        if (event instanceof NavigationError) {
-        }
+      }
     });
+    setInterval(()  => {
+      this.sincronizar();
+    }, 5000);
   }
+
   ngOnInit() {
     this.reloadCache();
     this._pushNotificationService.requestPermission();
+    this.sincronizacaoService.iniciarBD();
+    this.sincronizacaoService.syncPull();
+  }
+
+  sincronizar(){
+    this.sincronizacaoService.syncPush();
+    
   }
 
   reloadCache() {
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe( () => {
-          window.location.reload();
+      this.swUpdate.available.subscribe(() => {
+        window.location.reload();
       });
     }
   }
@@ -60,12 +70,13 @@ export class AppComponent implements OnInit {
   habilitar() {
     this._pushNotificationService.requestPermission();
   }
+
   notificar() {
     const title = 'Meu Pet Lindo';
     const options = new PushNotificationOptions();
     options.body = 'Native Push Notification';
     options.icon = 'https://img.icons8.com/color/96/000000/dog-house.png';
- 
+
     this._pushNotificationService.create(title, options).subscribe((notif) => {
       if (notif.event.type === 'show') {
         console.log('onshow');
@@ -81,8 +92,8 @@ export class AppComponent implements OnInit {
         console.log('close');
       }
     },
-    (err) => {
-         console.log(err);
-    });
+      (err) => {
+        console.log(err);
+      });
   }
 }

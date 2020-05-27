@@ -4,7 +4,7 @@
 </div>
 <mz-collection *ngIf="lista != null && lista.length > 0">
   <mz-collection-item *ngFor="let item of lista" [avatar]="true">
-    <img mz-avatar width="48" class="img" [src]=" item.idArquivo ? urlImagem+item.idArquivo : 'assets/icons/animals-allowed.png'"  >
+    <img mz-avatar width="48" class="img" [src]=" item.srcImg ? item.srcImg : (item.idArquivo ? urlImagem+item.idArquivo : 'assets/icons/animals-allowed.png')"  >
     <div class="pointer animal" [routerLink]="['/painel/'+item.id]"> {{ item.nome }}</div>
     <a class="red-text pointer icone" (click)="excluir(item.id)" mz-secondary-content>
       <i mz-icon-mdi [icon]="'delete'"></i></a>

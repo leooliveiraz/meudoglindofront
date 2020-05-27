@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MzToastService } from 'ngx-materialize';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VacinaService } from '../service/vacina.service';
+import { SincronizacaoService } from '../service/sincronizacao.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class VacinaComponent implements OnInit {
     private vacinaService: VacinaService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
+    private sync: SincronizacaoService,
     private router: Router,
   ) { }
   
@@ -52,18 +54,32 @@ export class VacinaComponent implements OnInit {
   }
 
   cadastrar(f: any) {
-    const pesagem: any = f.form.value;
-    pesagem.peso = parseFloat(pesagem.peso);
+    const vacinacao: any = f.form.value;
 
-    this.vacinaService.salvar(pesagem).subscribe(res => {
-      this.toastService.show('A vermifugação foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
+    this.vacinaService.salvar(vacinacao).subscribe(res => {
+      this.toastService.show('O registro de Vacina foi adicionada nas informações do seu bichinho!', 1000, 'green');
+      this.router.navigateByUrl(`/painel/${vacinacao.idAnimal}`);
+    }, erro => {
+      vacinacao.id = this.sync.getIndiceNegativo();
+      let listaVacinas = this.sync.getTodasVacinas();
+      if (listaVacinas) {
+        listaVacinas.push(vacinacao);
+      } else {
+        listaVacinas = [];
+        listaVacinas.push(vacinacao);
+      }      
+      localStorage.setItem('vacinas', JSON.stringify(listaVacinas));
+      localStorage.setItem('syncStatus', 'upload');
+      this.toastService.show('O registro de Vacina foi adicionada nas informações do seu bichinho!', 1000, 'green');
+      this.router.navigateByUrl(`/painel/${vacinacao.idAnimal}`);
     });
   }
 
   carregarAnimais() {
     this.animalService.listar().subscribe(res => {
       this.listaAnimais = res;
+    }, erro => {
+      this.listaAnimais = this.sync.getTodosAnimais();
     });
   }
 
