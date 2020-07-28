@@ -10,10 +10,10 @@
     <input mz-input [(ngModel)]="nome"
       name="nome"
       class="white-text" [label]="'Qual o nome do seu bichinho?'" 
-      length="150" type="text">
+      length="150" type="text" required >
   </mz-input-container>
 
-  <mz-input-container>
+  <mz-input-container (click)="$event.stopPropagation()">
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
     </i>
     <input mz-datepicker [(ngModel)]="dataNascimento" 
@@ -21,7 +21,7 @@
       [options]="options" id="datepicker" type="text">
   </mz-input-container>
 
-  <mz-input-container>
+  <mz-input-container (click)="$event.stopPropagation()">
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar-heart'">
     </i>
     <input mz-datepicker [(ngModel)]="dataAdocao" 
@@ -39,7 +39,7 @@
       type="checkbox">
   </mz-checkbox-container>
 
-  <mz-input-container *ngIf="declararObito">
+  <mz-input-container *ngIf="declararObito" (click)="$event.stopPropagation()">
     <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'christianity'">
     </i>
     <input mz-datepicker [(ngModel)]="dataObito" 

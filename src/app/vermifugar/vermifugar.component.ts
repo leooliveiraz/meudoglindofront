@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-vermifugar',
@@ -58,6 +59,10 @@ export class VermifugarComponent implements OnInit {
   }
 
   cadastrar(f: any) {
+    if (f.form.status === 'INVALID') {
+      Swal.fire('', 'Por favor, escolha o bichinho, e informe o vermífugo e a data de vermifugação.', 'warning');
+      return;
+    }
     const vermifugacao: any = f.form.value;
     this.vermifugoService.salvar(vermifugacao).subscribe(res => {
       this.toastService.show('A vermifugação foi adicionada nas informações do seu bichinho!', 1000, 'green');

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -56,6 +57,11 @@ export class VacinaComponent implements OnInit {
   }
 
   cadastrar(f: any) {
+    if (f.form.status === 'INVALID') {
+      Swal.fire('', 'Por favor, escolha o bichinho, e informe a vacina e a data de aplicação.', 'warning');
+      return;
+    }
+
     const vacinacao: any = f.form.value;
 
     this.vacinaService.salvar(vacinacao).subscribe(res => {

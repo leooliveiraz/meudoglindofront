@@ -6,6 +6,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pesar',
@@ -53,7 +54,11 @@ export class PesarComponent implements OnInit {
     this.carregarAnimais();
   }
 
-  cadastrar(f: any){
+  cadastrar(f: any) {
+    if (f.form.status === 'INVALID') {
+      Swal.fire('', 'Por favor, informe o qual animalzinho, a data da pesagem e o peso', 'warning');
+      return;
+    }
     let pesagem: any = f.form.value;
     pesagem.peso = parseFloat(pesagem.peso);
 

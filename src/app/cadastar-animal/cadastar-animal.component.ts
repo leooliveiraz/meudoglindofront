@@ -81,6 +81,10 @@ export class CadastarAnimalComponent implements OnInit {
   }
 
   cadastrar(form: any) {
+    if (form.form.status === 'INVALID') {
+      Swal.fire('', 'Por favor, informe o nome do seu bichinho.', 'warning');
+      return;
+    }
     if ( this.id ) {
       this.animalService.alterar(form.form.value).subscribe(res => {
         this.toastService.show('Os dados do seu bichinho foram atualizados com sucesso!', 1000, 'green');

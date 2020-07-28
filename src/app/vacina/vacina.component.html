@@ -6,25 +6,25 @@
           <mz-select-container>
             <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'dog'"></i>
             <select required mz-select id="options-select" [label]="'Escolha um Animalzinho'"
-              [placeholder]="'Escolha um Animalzinho para Vacinar'" name="idAnimal" [(ngModel)]="idAnimal">
+              required [placeholder]="'Escolha um Animalzinho para Vacinar'" name="idAnimal" [(ngModel)]="idAnimal">
               <option *ngFor="let item of listaAnimais" class="left circle" [value]="item.id">{{item.nome}} </option>
             </select>
           </mz-select-container>
           
             <mz-input-container>
               <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'pill'"></i>
-              <input mz-input [(ngModel)]="nome" name="nome" class="white-text" [label]="'Qual vacina foi aplicada?'"
+              <input mz-input required [(ngModel)]="nome" name="nome" class="white-text" [label]="'Qual vacina foi aplicada?'"
                 length="150" type="text">
             </mz-input-container>
         
-            <mz-input-container>
+            <mz-input-container (click)="$event.stopPropagation()">
               <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
               </i>
-              <input mz-datepicker [(ngModel)]="dataVacina" name="dataVacina" class="white-text"
+              <input mz-datepicker required [(ngModel)]="dataVacina" name="dataVacina" class="white-text"
                 [label]="'Quando foi aplicada a vacina?'" [options]="options" id="datepicker">
             </mz-input-container>
         
-            <mz-input-container>
+            <mz-input-container (click)="$event.stopPropagation()">
               <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar-arrow-right'">
               </i>
               <input mz-datepicker [(ngModel)]="dataProximaVacina" name="dataProximaVacina" class="white-text"
