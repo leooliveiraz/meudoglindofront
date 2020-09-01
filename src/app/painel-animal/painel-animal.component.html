@@ -20,6 +20,57 @@
 
   
 
+  <section id="secao-medicacoes">
+    <div class="yellow-text text-darken-1 center-align">
+      <h4>Medicações</h4>
+    </div>
+
+    <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaMedicacao.length === 0">
+      <p>
+        Ainda não encontramos nenhum registro de medicação do seu bichinho, clique no botão abaixo para
+        adicionar.
+      </p>
+    </div>
+
+    <div *ngIf="!carregando && listaMedicacao.length > 0">
+      <div class="row">
+        <div class="col s12 m6  " *ngFor="let item of listaMedicacao">
+          <div class="card">
+            <div class="card-content ">
+              <div class="row no-margin-bottom">
+                <div class="col s10 m10  no-padding">
+                  <span class="card-title">Medicação: <strong>{{ item.nome }}</strong> </span>
+                </div>
+                <div class="col s2 m2 no-padding">
+                  <div class="red-text right-align ">
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirMedicacao(item.id)"></i>
+                  </div>
+                </div>
+
+                <div class="col s12 m6  no-padding">
+                  Data da Medicação: <strong>{{ item.dataMedicamento | date: 'dd/MM/yyyy' }}</strong><br>
+                </div>
+                <div class="col s12 m6  no-padding">
+                  Próxima Medicação: <strong>{{ item.dataProxima | date: 'dd/MM/yyyy' }}</strong>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-align">
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/medicar'"
+        [queryParams]="{ animal: idAnimal }">
+        Medicar
+      </a>
+    </div>
+    <br>
+  </section>
+  <hr>
+
   <section id="secao-vacina">
     <div class="yellow-text text-darken-1 center-align">
       <h4>Vacinas</h4>
@@ -70,6 +121,7 @@
     <br>
   </section>
   <hr>
+
   <section id="secao-vermifugacoes">
     <div class="yellow-text text-darken-1 center-align">
       <h4>Vermifugações</h4>

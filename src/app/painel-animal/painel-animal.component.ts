@@ -11,6 +11,7 @@ import { VermifugoService } from '../service/vermifugo.service';
 import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
+import { MedicarService } from '../service/medicar.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -24,6 +25,7 @@ export class PainelAnimalComponent implements OnInit {
     private pesoService: PesoService,
     private vermifugoService: VermifugoService,
     private vacinaService: VacinaService,
+    private medicacaoService: MedicarService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private sync: SincronizacaoService,
@@ -41,6 +43,7 @@ export class PainelAnimalComponent implements OnInit {
   listaPeso: any = [];
   listaVermifugo: any = [];
   listaVacina: any = [];
+  listaMedicacao: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
@@ -92,6 +95,7 @@ export class PainelAnimalComponent implements OnInit {
         this.carregarPesos();
         this.carregarVermifugos();
         this.carregarVacinas();
+        this.carregarMedicacoes();
       }, erro => {
         this.carregarOffline();
         this.carregando = false;
@@ -132,6 +136,13 @@ export class PainelAnimalComponent implements OnInit {
       this.configurarGrafico();
     }, erro => this.carregando = false);
   }
+  
+  carregarMedicacoes() {
+    this.medicacaoService.listarPorAnimal(this.idAnimal).subscribe(res => {
+      this.listaMedicacao = res;
+      this.carregando = false;
+    }, erro => this.carregando = false);
+  }
 
   configurarGrafico() {
     this.lineChartData[0].label = this.animal.nome;
@@ -161,6 +172,28 @@ export class PainelAnimalComponent implements OnInit {
           this.carregarPesos();
         }, erro => {
           this.excluirPesoOffline(id);
+        });
+      }
+    });
+  }
+
+  excluirMedicacao(id) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Ao confirmar essa ação, você concorda em excluir esse registro de medicação.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim'
+    }).then((result) => {
+      if (result.value) {
+        this.pesoService.deletar(id).subscribe(res => {
+          this.toastService.show('Medicação Excluída!', 1000, 'red');
+          this.carregarMedicacoes();
+        }, erro => {
+          this.excluirMedicacaoOffline(id);
         });
       }
     });
@@ -220,6 +253,17 @@ export class PainelAnimalComponent implements OnInit {
     this.listaPeso.splice(indexLista, 1);
     this.configurarGrafico();
     localStorage.setItem('pesos', JSON.stringify(pesos));
+    localStorage.setItem('syncStatus', 'update');
+  }
+   
+  excluirMedicacaoOffline(id) {
+    this.sync.excluirMedicacao(id);
+    const medicacoes: any = JSON.parse(localStorage.getItem('medicacoes'));
+    const index = medicacoes.findIndex(a => a.id == id );
+    medicacoes.splice(index, 1);
+    const indexLista = this.listaMedicacao.findIndex(a => a.id == id );
+    this.listaMedicacao.splice(indexLista, 1);
+    localStorage.setItem('medicacoes', JSON.stringify(medicacoes));
     localStorage.setItem('syncStatus', 'update');
   }
   

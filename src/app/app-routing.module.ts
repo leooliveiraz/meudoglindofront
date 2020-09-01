@@ -9,6 +9,7 @@ import { PainelAnimalComponent } from './painel-animal/painel-animal.component';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
 import { VacinaComponent } from './vacina/vacina.component';
+import { MedicarComponent } from './medicar/medicar.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'cadastrar', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'editar/:id', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'meus-bichinhos', component: ListaAnimalComponent, canActivate: [AuthGuardService] },
+  { path: 'medicar', component: MedicarComponent, canActivate: [AuthGuardService] },
   { path: 'painel/:idAnimal', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
   { path: 'vermifugar', component: VermifugarComponent, canActivate: [AuthGuardService] },

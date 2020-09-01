@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { VermifugoService } from './vermifugo.service';
 import { VacinaService } from './vacina.service';
 import { OnlineOfflineService } from './online-offline.service';
+import { MedicarService } from './medicar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class SincronizacaoService {
     private pesoService: PesoService,
     private vermifugoService: VermifugoService,
     private vacinaService: VacinaService,
+    private medicacaoService: MedicarService,
     private onOffService: OnlineOfflineService) { }
 
 
@@ -49,6 +51,7 @@ export class SincronizacaoService {
           const pesosExcluir = this.getPesoExcluir();
           const vermifugosExcluir = this.getVermifugosExcluir();
           const vacinasExcluir = this.getVacinasExcluir();
+          const medicacoesExcluir = this.getMedicacoesExcluir();
           const qtdAnimal = animais.length;
           let indiceAnimal = 1;
           for (const animal of animais ) {
@@ -119,7 +122,11 @@ export class SincronizacaoService {
             this.vermifugoService.deletar(id).subscribe();
             }
           }
-          
+          for (const id of medicacoesExcluir) {
+            if (id > 0) {
+            this.medicacaoService.deletar(id).subscribe();
+            }
+          }
           this.syncClean();
           localStorage.setItem('syncStatus', 'ok');
         }
@@ -138,6 +145,7 @@ export class SincronizacaoService {
     localStorage.setItem('pesosExcluir', '[]');
     localStorage.setItem('vermifugosExcluir', '[]');
     localStorage.setItem('vacinasExcluir', '[]');
+    localStorage.setItem('medicacaoExcluir', '[]');
   }
 
   syncPull() {
@@ -161,6 +169,11 @@ export class SincronizacaoService {
         const vermifugos: any = res;
         localStorage.setItem('vermifugos', JSON.stringify(vermifugos));
       }, erro => { });
+
+      this.medicacaoService.listar().subscribe(res => {
+        const medicacoes: any = res;
+        localStorage.setItem('medicacoes', JSON.stringify(medicacoes));
+      }, erro => { });
     }
   }
 
@@ -175,6 +188,10 @@ export class SincronizacaoService {
   getTodosVermifugos() {
     const listaVermifugo: any = JSON.parse(localStorage.getItem('vermifugos'));
     return listaVermifugo;
+  }
+  getTodasMedicacoes() {
+    const listaMedicacao: any = JSON.parse(localStorage.getItem('medicacoes'));
+    return listaMedicacao;
   }
   getTodasVacinas() {
     const listaVacina: any = JSON.parse(localStorage.getItem('vacinas'));
@@ -201,6 +218,11 @@ export class SincronizacaoService {
     const listaVacina: any = JSON.parse(localStorage.getItem('vacinas'));
     const vacinas = listaVacina.filter(a => a.idAnimal == id);
     return vacinas;
+  }
+  getMedicacao(id) {
+    const listaMedicacao: any = JSON.parse(localStorage.getItem('medicacoes'));
+    const medicacoes = listaMedicacao.filter(a => a.idAnimal == id);
+    return medicacoes;
   }
 
   excluirAnimal(id) {
@@ -247,6 +269,18 @@ export class SincronizacaoService {
     localStorage.setItem('vacinasExcluir', JSON.stringify(vacinasExcluir));
   }
 
+
+  excluirMedicacao(id) {
+    let medicacoesExcluir: any = JSON.parse(localStorage.getItem('medicacacoesExcluir'));
+    if (medicacoesExcluir) {
+      medicacoesExcluir.push(id);
+    } else {
+      medicacoesExcluir = [];
+      medicacoesExcluir.push(id);
+    }
+    localStorage.setItem('medicacacoesExcluir', JSON.stringify(medicacoesExcluir));
+  }
+
   getAnimaisExcluir() {
     const animais: any = JSON.parse(localStorage.getItem('animaisExcluir'));
     return animais;
@@ -262,6 +296,10 @@ export class SincronizacaoService {
   getVermifugosExcluir() {
     const vermifugos: any = JSON.parse(localStorage.getItem('vermifugosExcluir'));
     return vermifugos;
+  }
+  getMedicacoesExcluir() {
+    const medicacoes: any = JSON.parse(localStorage.getItem('medicacoesExcluir'));
+    return medicacoes;
   }
 
   getIndiceNegativo() {

@@ -6,7 +6,6 @@ import { AuthorizationService } from './service/auth.service';
 import { SwUpdate, SwPush, } from '@angular/service-worker';
 import { OnlineOfflineService } from './service/online-offline.service';
 import { MzToastService } from 'ngx-materialize';
-import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
 import { AppService } from './service/app.service';
 
@@ -22,9 +21,10 @@ export class AppComponent implements OnInit {
     private authService: AuthorizationService,
     private toastService: MzToastService,
     private swUpdate: SwUpdate,
+    private swPush: SwPush,
+    private appService: AppService,
     private onOffService: OnlineOfflineService,
-    private sincronizacaoService: SincronizacaoService,
-    private _pushNotificationService: PushNotificationService) {
+    private sincronizacaoService: SincronizacaoService,) {
 
     this.onOffService.statusConexaoDispositivo().subscribe(online => {
       if (online) {
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.reloadCache();
-    this._pushNotificationService.requestPermission();
+    this.subscribeToNotifications();
     this.sincronizacaoService.iniciarBD();
     this.sincronizacaoService.syncPull();
   }
@@ -67,33 +67,17 @@ export class AppComponent implements OnInit {
     }
   }
 
-  habilitar() {
-    this._pushNotificationService.requestPermission();
-  }
-
-  notificar() {
-    const title = 'Meu Pet Lindo';
-    const options = new PushNotificationOptions();
-    options.body = 'Native Push Notification';
-    options.icon = 'https://img.icons8.com/color/96/000000/dog-house.png';
-
-    this._pushNotificationService.create(title, options).subscribe((notif) => {
-      if (notif.event.type === 'show') {
-        console.log('onshow');
-        setTimeout(() => {
-          notif.notification.close();
-        }, 3000);
-      }
-      if (notif.event.type === 'click') {
-        console.log('click');
-        notif.notification.close();
-      }
-      if (notif.event.type === 'close') {
-        console.log('close');
-      }
-    },
-      (err) => {
-        console.log(err);
-      });
+  subscribeToNotifications() {
+    if (this.swPush.isEnabled) {
+      this.swPush.requestSubscription({
+        serverPublicKey: 'BDx9spiF2Yfn6h7QSpMEeu43O_Scs70dTLNE_g3G6teYFZ1fcN4KwTrRiRFyzpSBVMWnKOTKpJEcIqEsZakxlok'
+      })
+      .then(sub => {
+        this.appService.inscrever(sub).subscribe(res => {
+          console.log(res)
+        });
+      })
+      .catch(err => console.error('Could not subscribe to notifications', err));
+    }
   }
 }

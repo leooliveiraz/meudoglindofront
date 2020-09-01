@@ -32,12 +32,12 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { PushNotificationService } from 'ngx-push-notifications';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagemAnimalComponent } from './imagem-animal/imagem-animal.component';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
 import { VacinaComponent } from './vacina/vacina.component';
+import { MedicarComponent } from './medicar/medicar.component';
 
 
 const config = new AuthServiceConfig([
@@ -69,6 +69,7 @@ export function provideConfig() {
     ImagemAnimalComponent,
     VermifugarComponent,
     VacinaComponent,
+    MedicarComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +101,6 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    PushNotificationService,
   ],
   bootstrap: [AppComponent]
 })
