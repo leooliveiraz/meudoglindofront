@@ -341,9 +341,6 @@ SOFTWARE.
 ngx-materialize
 Apache-2.0
 
-ngx-push-notifications
-MIT
-
 regenerator-runtime
 MIT
 MIT License

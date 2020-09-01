@@ -1876,6 +1876,14 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
             });
             // The activate event is triggered when this version of the service worker is
             // first activated.
+            this.scope.addEventListener('notificationclick', (event) => {
+                console.log('[Service Worker] Notification click Received. event:%s', event);
+                event.notification.close();
+                if (clients.openWindow && event.notification.data.url) {
+                    event.waitUntil(clients.openWindow(event.notification.data.url));
+                }
+            });
+            
             this.scope.addEventListener('activate', (event) => {
                 event.waitUntil((() => __awaiter$5(this, void 0, void 0, function* () {
                     // As above, it's safe to take over from existing clients immediately, since the new SW
