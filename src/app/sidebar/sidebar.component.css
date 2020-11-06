@@ -1,6 +1,17 @@
-.logo {   
-          margin: auto;
-          margin-top: 2em;
-          text-align: center;
-          font-weight: bold;
+.logo {
+  margin: auto;
+  margin-top: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+::ng-deep .divider {
+  padding: 0em 1em;
+  background-color: #9c27b0 !important;
+}
+.side-nav .divider{
+          margin: 0;
+}
+mz-sidenav-divider li {
+  padding: 0em 1em !important;
 }
