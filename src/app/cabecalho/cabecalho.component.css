@@ -1,5 +1,11 @@
 @media (max-width: 600px) {
-          ::ng-deep nav .brand-logo {
-                    width: 100%;
-          }
+  ::ng-deep nav .brand-logo {
+    width: 100%;
+     margin-left: 0em !important;
+  }
+}
+
+.brand-logo {
+  font-family: 'foo', 'Roboto';
+  margin-left: 1.4em;
 }

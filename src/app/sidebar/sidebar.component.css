@@ -1,10 +1,15 @@
 .logo {
   margin: auto;
-  margin-top: 2em;
+  margin-top: 1em;
   text-align: center;
-  font-weight: bold;
+  line-height: 1.5em;
+  margin-bottom: 1.6em;
 }
 
+.logo h4{
+  font-family: 'foo','Roboto';
+  margin-top: 0px;
+}
 ::ng-deep .divider {
   padding: 0em 1em;
   background-color: #9c27b0 !important;
@@ -14,4 +19,16 @@
 }
 mz-sidenav-divider li {
   padding: 0em 1em !important;
+}
+.chip-separator {
+  position: absolute;
+  margin-top: -1.57em;
+  margin-left: 1em;
+  line-height: 22px;
+  height: 20px;
+  font-size: 12px;
+}
+
+.botao-logout{
+  margin-top: .5em;
 }

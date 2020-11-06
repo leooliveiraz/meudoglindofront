@@ -8,21 +8,32 @@
       <a [routerLink]="['/']" (click)="fecharMenu()">
         <img src="https://img.icons8.com/color/96/000000/dog-house.png"/>
       </a>
-      <h4 [routerLink]="['/']" (click)="fecharMenu()">Meu Pet Lindo</h4>
+      <h4 [routerLink]="['/']" class="purple-text text-darken-4"  (click)="fecharMenu()">Meu Pet Lindo</h4>
     </div>
   </mz-sidenav-header>
   <mz-sidenav-link class="left-align" *ngIf="estaLogado">
+    <mz-sidenav-divider ></mz-sidenav-divider>
+    <div class="chip chip-separator yellow">
+      Informações dos Bichinhos
+    </div>
     <a [routerLink]="['/meus-bichinhos']" routerLinkActive="active" (click)="fecharMenu()">Meus Bichinhos</a>
     <a [routerLink]="['/cadastrar']" routerLinkActive="active" (click)="fecharMenu()" >Adicionar um Animalzinho</a>
     <mz-sidenav-divider ></mz-sidenav-divider>
+    <div class="chip chip-separator yellow">
+      Registrar Dados
+    </div>
     <a [routerLink]="['/medicar']" routerLinkActive="active" (click)="fecharMenu()"  >Medicamento</a>
     <a [routerLink]="['/pesar']" routerLinkActive="active" (click)="fecharMenu()"  >Peso</a>
     <a [routerLink]="['/vacinar']" routerLinkActive="active" (click)="fecharMenu()"  >Vacinas</a>
     <a [routerLink]="['/vermifugar']" routerLinkActive="active" (click)="fecharMenu()"  >Vermifugos</a>
   </mz-sidenav-link>
+
+  <mz-sidenav-divider ></mz-sidenav-divider>
+  <div class="chip chip-separator yellow">
+    Sobre o App
+  </div>
   <mz-sidenav-link class="left-align">
     <a [routerLink]="['/sobre']" routerLinkActive="active" (click)="fecharMenu()">Sobre</a>
   </mz-sidenav-link>
-  <br>
-  <app-logout *ngIf="estaLogado"></app-logout>
+  <app-logout (class)="botao-logout" *ngIf="estaLogado"></app-logout>
 </mz-sidenav>

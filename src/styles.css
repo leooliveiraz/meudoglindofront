@@ -1,11 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
 h1 {
-          margin-bottom: 1em !important;
+  margin-bottom: 1em !important;
 }
 
 @media (min-width: 900px) {
-          html {
-                    font-size: 16px !important;
-          }
+  html {
+    font-size: 16px !important;
+    color: '#666666'
+  }
 }
+
+
+@font-face {
+  font-family: 'Adigiana-Toybox-Regular';
+  src: url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.woff') format('woff'),
+    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
+    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot'),
+    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+          font-family: 'Foo';
+          src: url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.woff') format('woff'),
+            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
+            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot'),
+            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot?#iefix') format('embedded-opentype');
+          font-weight: normal;
+          font-style: normal;
+        }
