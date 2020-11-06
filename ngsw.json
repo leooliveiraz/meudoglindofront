@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1604629376166,
+  "timestamp": 1604684733071,
   "index": "https://leooliveiraz.github.io/meupetlindo/index.html",
   "assetGroups": [
     {
@@ -18,6 +18,16 @@
         "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.5136cbe62a63604402f2.woff2",
         "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.1f35e6a11d27d2e10d28.woff2",
         "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.44b78f142603eb69f593.woff",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.svg",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.woff",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/webfonts.ffonts.net.htm",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/webfonts.ffonts.net.txt",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.svg",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.woff",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/webfonts.ffonts.net.htm",
+        "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/webfonts.ffonts.net.txt",
         "https://leooliveiraz.github.io/meupetlindo/assets/icons/animals-allowed.png",
         "https://leooliveiraz.github.io/meupetlindo/assets/icons/communication.png",
         "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-128x128.png",
@@ -30,7 +40,7 @@
         "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-96x96.png",
         "https://leooliveiraz.github.io/meupetlindo/favicon.ico",
         "https://leooliveiraz.github.io/meupetlindo/index.html",
-        "https://leooliveiraz.github.io/meupetlindo/main.a225a97bb9517f08e7bc.js",
+        "https://leooliveiraz.github.io/meupetlindo/main.76bcb9657ae2ff3801cf.js",
         "https://leooliveiraz.github.io/meupetlindo/manifest.webmanifest",
         "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.63d2a5950fc212096c36.woff",
         "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.7fb0e3780372f10f8045.woff2",
@@ -40,7 +50,7 @@
         "https://leooliveiraz.github.io/meupetlindo/polyfills.d15cf5b3fe5c097b06a9.js",
         "https://leooliveiraz.github.io/meupetlindo/runtime.458556a34b891ea32398.js",
         "https://leooliveiraz.github.io/meupetlindo/scripts.4460407f411e5bfba65f.js",
-        "https://leooliveiraz.github.io/meupetlindo/styles.533b4341607789a01ce9.css"
+        "https://leooliveiraz.github.io/meupetlindo/styles.cd563d331e173cd83b9a.css"
       ],
       "patterns": []
     },
@@ -76,6 +86,16 @@
     "https://leooliveiraz.github.io/meupetlindo/Roboto-Regular.5136cbe62a63604402f2.woff2": "c193deaa915e7183828400922700567900fb6cc3",
     "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.1f35e6a11d27d2e10d28.woff2": "c321aeb611cf1dcb25717484a4ced717d8ca76fa",
     "https://leooliveiraz.github.io/meupetlindo/Roboto-Thin.44b78f142603eb69f593.woff": "cb8f61464f349af887ba96f6a2ae1e318b3cc8d9",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot": "a667f7076011fe8b019182e27ce054bf8049af8b",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.svg": "27ce98efdb15f400ec9eb3747ee70760a6a61950",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.woff": "2f5f8ec0a14d58c3787e6856c04263c35d6de58e",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/webfonts.ffonts.net.htm": "fb8cba125c2c25922b2063bd9a2bef412db09de4",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Adigiana-Toybox-Regular/webfonts.ffonts.net.txt": "ab7f41ac9895304568700a04b2b88dc80643428d",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot": "740f6398e962e1e41a626b68a2c77764be8fe60d",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.svg": "82984498a8a45784190f4a5cd612f648fae468e0",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.woff": "9374ce46a3baa0a11424ec24c90091dea4fee341",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/webfonts.ffonts.net.htm": "fb8cba125c2c25922b2063bd9a2bef412db09de4",
+    "https://leooliveiraz.github.io/meupetlindo/assets/fonts/webfonts_Foo-Regular/webfonts.ffonts.net.txt": "ab7f41ac9895304568700a04b2b88dc80643428d",
     "https://leooliveiraz.github.io/meupetlindo/assets/icons/animals-allowed.png": "7dbc05900f449b418fdb9db1b579a32643e700e1",
     "https://leooliveiraz.github.io/meupetlindo/assets/icons/communication.png": "507aba7de7c83cd00fd3a973d9fd94a70b07d0aa",
     "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-128x128.png": "450832ca44a0d364edee420a9661857d3cdd5498",
@@ -87,8 +107,8 @@
     "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-72x72.png": "4dc3735c9799ac2752292dae54896a6016bff6a4",
     "https://leooliveiraz.github.io/meupetlindo/assets/icons/icon-96x96.png": "a4adc5136e554efe199355231c1eb81312916469",
     "https://leooliveiraz.github.io/meupetlindo/favicon.ico": "0e73a3caac48e66ae8553e73632eb1f7a4016783",
-    "https://leooliveiraz.github.io/meupetlindo/index.html": "395bb853e3c4a2f4a1477fcc97339886c615c7e5",
-    "https://leooliveiraz.github.io/meupetlindo/main.a225a97bb9517f08e7bc.js": "ebe87d50038fc0eaf46032807ee37c0b2d4048aa",
+    "https://leooliveiraz.github.io/meupetlindo/index.html": "93a320d439ff2b74ed83b88bce98910ca21f40fb",
+    "https://leooliveiraz.github.io/meupetlindo/main.76bcb9657ae2ff3801cf.js": "05d6e37c5b16bb6e453c781b7efd5136f5b19eb8",
     "https://leooliveiraz.github.io/meupetlindo/manifest.webmanifest": "7ccc5c09809e6a4d827cdffd1d1706a2b2a14754",
     "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.63d2a5950fc212096c36.woff": "082e6c486ea2fe3823ba7dfb6dadabd0b30a499c",
     "https://leooliveiraz.github.io/meupetlindo/materialdesignicons-webfont.7fb0e3780372f10f8045.woff2": "2b5469fc9cc994a4b4bfe625f6264434d1deaab7",
@@ -98,7 +118,7 @@
     "https://leooliveiraz.github.io/meupetlindo/polyfills.d15cf5b3fe5c097b06a9.js": "ea190a5e66e74daa0e571c47946b11353906b882",
     "https://leooliveiraz.github.io/meupetlindo/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://leooliveiraz.github.io/meupetlindo/scripts.4460407f411e5bfba65f.js": "e9f210758d8ed29681fa1667b5a13baa01931860",
-    "https://leooliveiraz.github.io/meupetlindo/styles.533b4341607789a01ce9.css": "2d21c3142bde030688696137e17660baae7609bc"
+    "https://leooliveiraz.github.io/meupetlindo/styles.cd563d331e173cd83b9a.css": "5391ed51669a3350dab297ea0973d1976761a0f2"
   },
   "navigationUrls": [
     {
