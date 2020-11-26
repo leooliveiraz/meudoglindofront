@@ -20,6 +20,11 @@
 mz-sidenav-divider li {
   padding: 0em 1em !important;
 }
+
+::ng-deep .side-nav li > a {
+  height: 40px !important;
+  line-height: 40px !important;
+}
 .chip-separator {
   position: absolute;
   margin-top: -1.57em;

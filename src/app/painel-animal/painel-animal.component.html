@@ -19,6 +19,53 @@
 <div *ngIf="!carregando">
 
   
+  <section id="secao-medicacoes">
+    <div class="yellow-text text-darken-1 center-align">
+      <h4>Exames Realizados</h4>
+    </div>
+
+    <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaExame.length === 0">
+      <p>
+        Ainda não encontramos nenhum registro de exame do seu bichinho, clique no botão abaixo para
+        adicionar.
+      </p>
+    </div>
+
+    <div *ngIf="!carregando && listaExame.length > 0">
+      <div class="row">
+        <div class="col s12 m6  " *ngFor="let item of listaExame">
+          <div class="card">
+            <div class="card-content ">
+              <div class="row no-margin-bottom">
+                <div class="col s10 m10  no-padding">
+                  <span class="card-title">Exame: <strong>{{ item.nome }}</strong> </span>
+                </div>
+                <div class="col s2 m2 no-padding">
+                  <div class="red-text right-align ">
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirExame(item.id)"></i>
+                  </div>
+                </div>
+
+                <div class="col s12 m6  no-padding">
+                  Data do Exame: <strong>{{ item.dataExame | date: 'dd/MM/yyyy' }}</strong><br>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-align">
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/exame'"
+        [queryParams]="{ animal: idAnimal }">
+        Registrar Exame
+      </a>
+    </div>
+    <br>
+  </section>
+  <hr>
 
   <section id="secao-medicacoes">
     <div class="yellow-text text-darken-1 center-align">
@@ -50,7 +97,7 @@
                 <div class="col s12 m6  no-padding">
                   Data da Medicação: <strong>{{ item.dataMedicamento | date: 'dd/MM/yyyy' }}</strong><br>
                 </div>
-                <div class="col s12 m6  no-padding">
+                <div class="col s12 m6  no-padding" *ngIf="item.dataProxima">
                   Próxima Medicação: <strong>{{ item.dataProxima | date: 'dd/MM/yyyy' }}</strong>
                 </div>
 
@@ -101,7 +148,7 @@
                 <div class="col s12 m6  no-padding">
                   Data da Vacina: <strong>{{ item.dataVacina | date: 'dd/MM/yyyy' }}</strong><br>
                 </div>
-                <div class="col s12 m6  no-padding">
+                <div class="col s12 m6  no-padding" *ngIf="item.dataProximaVacina">
                   Próxima Vacina: <strong>{{ item.dataProximaVacina | date: 'dd/MM/yyyy' }}</strong>
                 </div>
 
@@ -153,7 +200,7 @@
                 <div class="col s12 m6  no-padding">
                   Data da Vermifugação: <strong>{{ item.dataVermifugo | date: 'dd/MM/yyyy' }}</strong><br>
                 </div>
-                <div class="col s12 m6  no-padding">
+                <div class="col s12 m6  no-padding" *ngIf="item.dataProximoVermifugo">
                   Próxima Vermifugação: <strong>{{ item.dataProximoVermifugo | date: 'dd/MM/yyyy' }}</strong>
                 </div>
 

@@ -10,6 +10,7 @@ import { AuthGuardService } from './service/auth/auth-guard.service';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
 import { VacinaComponent } from './vacina/vacina.component';
 import { MedicarComponent } from './medicar/medicar.component';
+import { ExameComponent } from './exame/exame.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
   { path: 'vermifugar', component: VermifugarComponent, canActivate: [AuthGuardService] },
   { path: 'vacinar', component: VacinaComponent, canActivate: [AuthGuardService] },
+  { path: 'exame', component: ExameComponent, canActivate: [AuthGuardService] },
   { path: 'sobre', component: SobreComponent },
 ];
 

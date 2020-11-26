@@ -12,6 +12,7 @@ import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
 import { MedicarService } from '../service/medicar.service';
+import { ExameService } from '../service/exame.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -26,6 +27,7 @@ export class PainelAnimalComponent implements OnInit {
     private vermifugoService: VermifugoService,
     private vacinaService: VacinaService,
     private medicacaoService: MedicarService,
+    private exameService: ExameService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private sync: SincronizacaoService,
@@ -44,6 +46,7 @@ export class PainelAnimalComponent implements OnInit {
   listaVermifugo: any = [];
   listaVacina: any = [];
   listaMedicacao: any = [];
+  listaExame: any = [];
   public innerWidth: any;
   public lineChartData: any[] = [
     { data: [], label: '' },
@@ -80,7 +83,9 @@ export class PainelAnimalComponent implements OnInit {
 
   carregarAnimal() {
     this.carregando = true;
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
+    console.log(this.onOffService.isOnline)
+    console.log(this.onOffService.getStatusServidor())
+    // if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
       this.animalService.buscar(this.idAnimal).subscribe(res => {
         this.animal = res;
         if (this.animal.idArquivo) {
@@ -92,6 +97,8 @@ export class PainelAnimalComponent implements OnInit {
             () => this.router.navigateByUrl('/meus-bichinhos')
           );
         }
+        console.log(this.idAnimal)
+        this.carregarExames();
         this.carregarPesos();
         this.carregarVermifugos();
         this.carregarVacinas();
@@ -100,9 +107,9 @@ export class PainelAnimalComponent implements OnInit {
         this.carregarOffline();
         this.carregando = false;
       });
-    } else {
-      this.carregarOffline();
-    }
+    // } else {
+    //   this.carregarOffline();
+    // }
   }
 
   carregarOffline() {
@@ -112,6 +119,13 @@ export class PainelAnimalComponent implements OnInit {
     this.listaVacina = this.sync.getVacinas(this.idAnimal);
     this.configurarGrafico();
     this.carregando = false;
+  }
+
+  carregarExames() {
+    this.exameService.listarPorAnimal(this.idAnimal).subscribe(res => {
+      this.listaExame = res;
+      this.carregando = false;
+    }, erro => console.log(erro));
   }
 
   carregarPesos() {
@@ -177,6 +191,28 @@ export class PainelAnimalComponent implements OnInit {
     });
   }
 
+  excluirExame(id) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Ao confirmar essa ação, você concorda em excluir esse registro de exame.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim'
+    }).then((result) => {
+      if (result.value) {
+        this.exameService.deletar(id).subscribe(res => {
+          this.toastService.show('Exame Excluído!', 1000, 'red');
+          this.carregarExames();
+        }, erro => {
+          // this.excluirMedicacaoOffline(id);
+        });
+      }
+    });
+  }
+
   excluirMedicacao(id) {
     Swal.fire({
       title: 'Tem certeza?',
@@ -189,7 +225,7 @@ export class PainelAnimalComponent implements OnInit {
       confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
-        this.pesoService.deletar(id).subscribe(res => {
+        this.medicacaoService.deletar(id).subscribe(res => {
           this.toastService.show('Medicação Excluída!', 1000, 'red');
           this.carregarMedicacoes();
         }, erro => {

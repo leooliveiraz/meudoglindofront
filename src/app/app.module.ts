@@ -38,6 +38,7 @@ import { ImagemAnimalComponent } from './imagem-animal/imagem-animal.component';
 import { VermifugarComponent } from './vermifugar/vermifugar.component';
 import { VacinaComponent } from './vacina/vacina.component';
 import { MedicarComponent } from './medicar/medicar.component';
+import { ExameComponent } from './exame/exame.component';
 
 
 const config = new AuthServiceConfig([
@@ -70,6 +71,7 @@ export function provideConfig() {
     VermifugarComponent,
     VacinaComponent,
     MedicarComponent,
+    ExameComponent,
   ],
   imports: [
     BrowserModule,

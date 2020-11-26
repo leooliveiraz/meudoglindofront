@@ -1,0 +1,35 @@
+<h1 class="yellow-text text-darken-1 center-align">
+  Registrar Exame!
+</h1>
+
+<form #f="ngForm" (ngSubmit)="cadastrar(f)">
+
+  <mz-select-container (click)="$event.stopPropagation()">
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'dog'"></i>
+    <select required mz-select id="options-select" [label]="'Escolha um Animalzinho'"
+      [placeholder]="'Escolha um Animalzinho'" name="idAnimal" [(ngModel)]="idAnimal">
+      <option *ngFor="let item of listaAnimais" class="left circle" [value]="item.id">{{item.nome}} </option>
+    </select>
+  </mz-select-container>
+
+  <mz-input-container>
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'flask-outline'"></i>
+    <input mz-input [(ngModel)]="nome" name="nome" class="white-text"
+      [label]="'Qual exame seu bichinho realizou?'" length="150" type="text">
+  </mz-input-container>
+
+  <mz-input-container (click)="$event.stopPropagation()">
+    <i mz-icon-mdi mz-input-prefix class="yellow-text" [icon]="'calendar'">
+    </i>
+    <input mz-datepicker [(ngModel)]="dataExame" required name="dataExame" class="white-text"
+      [label]="'Qual foi a data do exame?'" [options]="options" id="datepicker">
+  </mz-input-container>
+
+  <div class="right-align">
+    <br />
+    <button mz-button [large]="true" class="orange accent-3 white-text" type="submit">
+      <i mz-icon-mdi [align]="'left'" [icon]="'content-save'" [size]="'36px'"> </i>
+      Salvar
+    </button>
+  </div>
+</form>

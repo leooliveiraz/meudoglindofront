@@ -14,20 +14,85 @@ h1 {
 
 @font-face {
   font-family: 'Adigiana-Toybox-Regular';
-  src: url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.woff') format('woff'),
-    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
-    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot'),
-    url('/assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot?#iefix') format('embedded-opentype');
+  src: url('./assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.woff') format('woff'),
+    url('./assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
+    url('./assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot'),
+    url('./assets/fonts/webfonts_Adigiana-Toybox-Regular/Adigiana-Toybox-Regular.ttf.eot?#iefix') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-          font-family: 'Foo';
-          src: url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.woff') format('woff'),
-            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
-            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot'),
-            url('/assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot?#iefix') format('embedded-opentype');
-          font-weight: normal;
-          font-style: normal;
-        }
+  font-family: 'Foo';
+  src: url('./assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.woff') format('woff'),
+    url('./assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.svg#Adigiana-Toybox-Regular') format('svg'),
+    url('./assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot'),
+    url('./assets/fonts/webfonts_Foo-Regular/Foo-Regular.ttf.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "acme";
+    src: local("acme"), url('./assets/fonts/acme/Acme-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "calistoga";
+    src: local("calistoga"), url('./assets/fonts/calistoga/Calistoga-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "fredoka_one";
+    src: local("fredoka_one"), url('./assets/fonts/fredoka_one/FredokaOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "lilita_one";
+    src: local("lilita_one"), url('./assets/fonts/lilita_one/LilitaOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "modak";
+    src: local("modak"), url('./assets/fonts/modak/Modak-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "nerko_one";
+    src: local("nerko_one"), url('./assets/fonts/nerko_one/NerkoOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "passion_one";
+    src: local("passion_one"), url('./assets/fonts/passion_one/PassionOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "changa_one";
+    src: local("changa_one"), url('./assets/fonts/changa_one/ChangaOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ranchers";
+    src: local("ranchers"), url('./assets/fonts/ranchers/Ranchers-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "wendy_one";
+    src: local("wendy_one"), url('./assets/fonts/wendy_one/WendyOne-Regular.ttf') format("truetype");
+  font-style: normal;
+}
+
+h1{
+  font-family: 'passion_one','fredoka_one';
+}
