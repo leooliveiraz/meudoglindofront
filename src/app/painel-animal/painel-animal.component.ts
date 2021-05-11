@@ -57,6 +57,7 @@ export class PainelAnimalComponent implements OnInit {
       // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{
         ticks: {
+          beginAtZero: true,
           stepSize: 1,
           min: 0,
           maxRotation: 89,
