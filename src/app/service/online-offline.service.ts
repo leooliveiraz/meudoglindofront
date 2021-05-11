@@ -17,7 +17,7 @@ export class OnlineOfflineService {
     window.addEventListener('offline', () => this.atualizaStatusConexaoDispositivo());
     setInterval(()  => {
       this.atualizarStatusServidor();
-   }, 5000);
+   }, 1000);
   }
 
   atualizarStatusServidor() {

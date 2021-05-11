@@ -1,0 +1,27 @@
+p{
+  font-size: large;
+}
+.carregando {
+  text-align: center;
+  margin-top: 5rem;
+}
+.carregando img {
+  width: 10em;
+  margin-bottom: -2em;
+}
+@media (max-width: 600px) {
+  .carregando {
+    margin-top: 3rem;
+  }
+  .carregando img {
+    width: 9em;
+  }
+}
+
+.circle{
+  border-width: 7px;
+  border-color: #ffeb3b;
+}
+.circle-clipper{
+  border-color: #ffeb3b;
+}

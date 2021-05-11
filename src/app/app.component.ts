@@ -17,20 +17,25 @@ import { AppService } from './service/app.service';
 export class AppComponent implements OnInit {
   title = 'MeuDogLindo';
   estaLogado = false;
+
   constructor(private router: Router,
     private authService: AuthorizationService,
     private toastService: MzToastService,
     private swUpdate: SwUpdate,
     private swPush: SwPush,
     private appService: AppService,
-    private onOffService: OnlineOfflineService,
+    public onOffService: OnlineOfflineService,
     private sincronizacaoService: SincronizacaoService,) {
-
-    this.onOffService.statusConexaoDispositivo().subscribe(online => {
-      if (online) {
-        this.toastService.show('Aplicação Online.', 500, 'green');
-      } else {
-        this.toastService.show('Sem conexão com a internet no momento.', 1000, 'red');
+    
+      this.serverOnline();
+      setInterval(()  => {
+        this.serverOnline();
+      }, 1000);
+      this.onOffService.statusConexaoDispositivo().subscribe(online => {
+        if (online) {
+          this.toastService.show('Aplicação Online.', 500, 'green');
+        } else {
+          this.toastService.show('Sem conexão com a internet no momento.', 1000, 'red');
       }
     });
 
@@ -42,9 +47,7 @@ export class AppComponent implements OnInit {
         }
       }
     });
-    setInterval(()  => {
-      this.sincronizar();
-    }, 5000);
+    
   }
 
   ngOnInit() {
@@ -56,7 +59,10 @@ export class AppComponent implements OnInit {
 
   sincronizar(){
     this.sincronizacaoService.syncPush();
-    
+  }
+
+  serverOnline(){
+    this.onOffService.atualizarStatusServidor();
   }
 
   reloadCache() {
