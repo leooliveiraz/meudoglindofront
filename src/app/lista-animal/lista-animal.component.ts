@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AnimalService } from '../service/animal.service';
 import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
-import { SincronizacaoService } from '../service/sincronizacao.service';
-import { OnlineOfflineService } from '../service/online-offline.service';
 
 @Component({
   selector: 'app-lista-animal',
@@ -15,9 +13,7 @@ export class ListaAnimalComponent implements OnInit {
 
   constructor(
     private service: AnimalService,
-    private toastService: MzToastService,
-    private sync: SincronizacaoService,
-    private onOffService: OnlineOfflineService) { }
+    private toastService: MzToastService) { }
 
   lista: any = [];
   carregando = false;
@@ -40,48 +36,23 @@ export class ListaAnimalComponent implements OnInit {
       confirmButtonText: 'Sim'
     }).then((result) => {
       if (result.value) {
-        if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
           this.service.deletar(id).subscribe(res => {
             this.toastService.show('Animalzinho Excluído!', 1000, 'red');
             this.carregar();
           }, erro => {
-            this.excluirOffline(id);
-          });
-        } else {
-          this.excluirOffline(id);
-        }
+            this.toastService.show('Não foi possível excluir esse Animalzinho! Tente novamente mais tarde', 1000, 'red');
+        });
       }
     });
   }
 
-  excluirOffline(id) {
-    this.sync.excluirAnimal(id);
-    const animais: any = JSON.parse(localStorage.getItem('animais'));
-    const index = animais.findIndex(a => a.id == id);
-    animais.splice(index, 1);
-    const indexLista = this.lista.findIndex(a => a.id == id);
-    this.lista.splice(indexLista, 1);
-    localStorage.setItem('animais', JSON.stringify(animais));
-  }
-
   carregar() {
     this.carregando = true;
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
       this.service.listar().subscribe(res => {
         this.lista = res;
         this.carregando = false;
       }, erro => {
-        this.carregarOffline();
-      });
-    } else {
-      this.carregarOffline();
-    }
-  }
-  carregarOffline() {
-    const animais = localStorage.getItem('animais');
-    if (animais) {
-      this.lista = JSON.parse(animais);
-    }
-    this.carregando = false;
+        this.carregando = false;
+    });
   }
 }

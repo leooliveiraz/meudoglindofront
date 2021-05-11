@@ -43,6 +43,7 @@ export class CadastarAnimalComponent implements OnInit {
     declararObito = false;
     srcImagem = null;
     imagemAlterada = false;
+    salvando = false;
 
   ngOnInit() {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
@@ -85,6 +86,7 @@ export class CadastarAnimalComponent implements OnInit {
       Swal.fire('', 'Por favor, informe o nome do seu bichinho.', 'warning');
       return;
     }
+    this.salvando=true;
     if ( this.id ) {
       this.animalService.alterar(form.form.value).subscribe(res => {
         this.toastService.show('Os dados do seu bichinho foram atualizados com sucesso!', 1000, 'green');
@@ -96,7 +98,8 @@ export class CadastarAnimalComponent implements OnInit {
           this.router.navigateByUrl('/meus-bichinhos');
         }
       }, error => {
-        this.salvarOffline(form);
+        this.salvando=false;
+        this.toastService.show('Não foi possível salvar esse registro! Tente novamente mais tarde', 1000, 'red');
       });
     } else {
       this.animalService.salvar(form.form.value).subscribe(res => {
@@ -110,34 +113,10 @@ export class CadastarAnimalComponent implements OnInit {
           this.router.navigateByUrl('/meus-bichinhos');
         }
       }, erro => {
-        this.salvarOffline(form);
+        this.salvando=false; 
+        this.toastService.show('Não foi possível salvar esse registro! Tente novamente mais tarde', 1000, 'red');
       });
     }
-  }
-  salvarOffline(form) {
-    const registro = form.form.value;
-    if (!registro.id) {
-      registro.id = this.sync.getIndiceNegativo();
-    }
-    if (this.srcImagem && this.imagemAlterada) {
-      registro.srcImg = this.srcImagem;
-      registro.imagemAlterada = true;
-    }
-    const listaAnimais = JSON.parse(localStorage.getItem('animais'));
-    let registroEncontrado = false;
-    for (let i = 0 ; i < listaAnimais.length ; i++) {
-      if (listaAnimais[i].id == registro.id) {
-        listaAnimais[i] = registro;
-        registroEncontrado = true;
-      }
-    }
-    if (!registroEncontrado) {
-      listaAnimais.push(registro);
-    }
-    localStorage.setItem('animais', JSON.stringify(listaAnimais));
-    localStorage.setItem('syncStatus', 'upload');
-    this.toastService.show('Salvo com sucesso!', 1000, 'green');
-    this.router.navigateByUrl('/meus-bichinhos');
   }
 
   alterarImagem(event) {

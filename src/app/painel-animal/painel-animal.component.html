@@ -1,6 +1,6 @@
 <app-imagem-animal [src]="srcImg"></app-imagem-animal>
 <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
-<div class="yellow-text text-darken-1 center-align info" id="data-nascimento">
+<div class="yellow-text text-darken-1 center-align info" id="data-nascimento" *ngIf="animal?.dataNascimento">
   <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'" ></i>
   {{animal?.dataNascimento | date: 'dd/MM/yyyy' }}
 </div>

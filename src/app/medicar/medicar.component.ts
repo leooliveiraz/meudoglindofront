@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AnimalService } from '../service/animal.service';
 import { MzToastService } from 'ngx-materialize';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SincronizacaoService } from '../service/sincronizacao.service';
-import { OnlineOfflineService } from '../service/online-offline.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { MedicarService } from '../service/medicar.service';
@@ -20,9 +18,7 @@ export class MedicarComponent implements OnInit {
     private medicarService: MedicarService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private sync: SincronizacaoService,
-    private onOffService: OnlineOfflineService
+    private router: Router
   ) { }
   
   idAnimal: number = null;
@@ -32,6 +28,7 @@ export class MedicarComponent implements OnInit {
   urlImagem = `${environment.API_URL}arquivo/979FEB8D61425164740D8D5739758DFDFE945CC59A9BFECB0ED602E13A6303AF`;
 
   listaAnimais: any = [];
+  salvando = false;
 
   diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
     mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' , 'Dezembro' ];
@@ -62,36 +59,22 @@ export class MedicarComponent implements OnInit {
       Swal.fire('', 'Por favor, escolha o bichinho, e informe a data e a medicação.', 'warning');
       return;
     }
+    this.salvando = true;
     const medicacao: any = f.form.value;
     this.medicarService.salvar(medicacao).subscribe(res => {
       this.toastService.show('A medicação foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${medicacao.idAnimal}`);
     }, erro => {
-      medicacao.id = this.sync.getIndiceNegativo();
-      let listaMedicacao = this.sync.getTodasMedicacoes();
-      if (listaMedicacao) {
-        listaMedicacao.push(medicacao);
-      } else {
-        listaMedicacao = [];
-        listaMedicacao.push(medicacao);
-      }
-      localStorage.setItem('medicacoes', JSON.stringify(listaMedicacao));
-      localStorage.setItem('syncStatus', 'upload');
-      this.toastService.show('A medicação foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      this.router.navigateByUrl(`/painel/${medicacao.idAnimal}`);
+      this.salvando = false;
+      this.toastService.show('Não foi possível salvar essa medicação! Tente novamente mais tarde', 1000, 'red');
     });
   }
 
   carregarAnimais() {
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
-      this.animalService.listar().subscribe(res => {
+    this.animalService.listar().subscribe(res => {
         this.listaAnimais = res;
       }, erro => {
-        this.listaAnimais = this.sync.getTodosAnimais();
-      });
-    } else {
-      this.listaAnimais = this.sync.getTodosAnimais();
-    }
+    });
   }
 
 

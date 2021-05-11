@@ -5,9 +5,6 @@ import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AnimalService } from '../service/animal.service';
-import { MedicarService } from '../service/medicar.service';
-import { OnlineOfflineService } from '../service/online-offline.service';
-import { SincronizacaoService } from '../service/sincronizacao.service';
 
 @Component({
   selector: 'app-exame',
@@ -21,9 +18,7 @@ export class ExameComponent implements OnInit {
     private exameService: ExameService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private sync: SincronizacaoService,
-    private onOffService: OnlineOfflineService
+    private router: Router
   ) { }
   
   idAnimal: number = null;
@@ -68,33 +63,17 @@ export class ExameComponent implements OnInit {
       this.toastService.show('O Exame foi adicionado nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${exame.idAnimal}`);
     }, erro => {
-      console.log(erro)
       this.toastService.show('Desculpe, não foi possível salvar esse exame!', 1000, 'red');
-      // medicacao.id = this.sync.getIndiceNegativo();
-      // let listaMedicacao = this.sync.getTodasMedicacoes();
-      // if (listaMedicacao) {
-      //   listaMedicacao.push(medicacao);
-      // } else {
-      //   listaMedicacao = [];
-      //   listaMedicacao.push(medicacao);
-      // }
-      // localStorage.setItem('medicacoes', JSON.stringify(listaMedicacao));
-      // localStorage.setItem('syncStatus', 'upload');
-      // this.toastService.show('A medicação foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      // this.router.navigateByUrl(`/painel/${medicacao.idAnimal}`);
     });
   }
 
   carregarAnimais() {
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
       this.animalService.listar().subscribe(res => {
         this.listaAnimais = res;
       }, erro => {
-        this.listaAnimais = this.sync.getTodosAnimais();
+        
       });
-    } else {
-      this.listaAnimais = this.sync.getTodosAnimais();
-    }
+    
   }
 
 }

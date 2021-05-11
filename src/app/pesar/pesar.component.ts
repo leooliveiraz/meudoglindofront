@@ -4,8 +4,6 @@ import { PesoService } from '../service/peso.service';
 import { MzToastService } from 'ngx-materialize';
 import { Router,ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { SincronizacaoService } from '../service/sincronizacao.service';
-import { OnlineOfflineService } from '../service/online-offline.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,9 +17,7 @@ export class PesarComponent implements OnInit {
     private pesoService: PesoService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private sync: SincronizacaoService,
     private router: Router,
-    private onOffService: OnlineOfflineService
   ) { }
   idAnimal: number = null;
   peso: number = null;
@@ -29,7 +25,7 @@ export class PesarComponent implements OnInit {
   urlImagem = `${environment.API_URL}arquivo/979FEB8D61425164740D8D5739758DFDFE945CC59A9BFECB0ED602E13A6303AF`;
 
   listaAnimais:any = [];
-
+  salvando = false;
   diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
     mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' , 'Dezembro' ];
     public options: Pickadate.DateOptions = {
@@ -59,6 +55,7 @@ export class PesarComponent implements OnInit {
       Swal.fire('', 'Por favor, informe o qual animalzinho, a data da pesagem e o peso', 'warning');
       return;
     }
+    this.salvando = true;
     let pesagem: any = f.form.value;
     pesagem.peso = parseFloat(pesagem.peso);
 
@@ -66,30 +63,16 @@ export class PesarComponent implements OnInit {
       this.toastService.show('A pesagem foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
     }, erro => {
-      pesagem.id = this.sync.getIndiceNegativo();
-      let listaPeso = this.sync.getTodosPesos();
-      if (listaPeso) {
-        listaPeso.push(pesagem);
-      } else {
-        listaPeso = [];
-        listaPeso.push(pesagem);
-      }
-      localStorage.setItem('pesos', JSON.stringify(listaPeso));
-      localStorage.setItem('syncStatus', 'upload');
-      this.toastService.show('A pesagem foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
+      console.log(erro)
+      this.salvando = false;
+      this.toastService.show('Não foi possível salvar o peso do seu bichinho! Tente novamente mais tarde', 1000, 'red');
     });
   }
 
   carregarAnimais() {
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
-      this.animalService.listar().subscribe(res => {
-        this.listaAnimais = res;
-      }, erro => {
-        this.listaAnimais = this.sync.getTodosAnimais();
-      });
-    } else {
-      this.listaAnimais = this.sync.getTodosAnimais();
-    }
+    this.animalService.listar().subscribe(res => {
+      this.listaAnimais = res;
+    }, erro => {
+    });
   }
 }

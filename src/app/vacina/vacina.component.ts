@@ -20,9 +20,7 @@ export class VacinaComponent implements OnInit {
     private vacinaService: VacinaService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private sync: SincronizacaoService,
     private router: Router,
-    private onOffService: OnlineOfflineService
   ) { }
 
   idAnimal: number = null;
@@ -31,6 +29,7 @@ export class VacinaComponent implements OnInit {
   dataProximaVacina = '';
 
   listaAnimais: any = [];
+  salvando = false;
 
   diaSemana = ['Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'];
   mesAno = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
@@ -61,38 +60,23 @@ export class VacinaComponent implements OnInit {
       Swal.fire('', 'Por favor, escolha o bichinho, e informe a vacina e a data de aplicação.', 'warning');
       return;
     }
-
+    this.salvando = true;
     const vacinacao: any = f.form.value;
 
     this.vacinaService.salvar(vacinacao).subscribe(res => {
       this.toastService.show('O registro de Vacina foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${vacinacao.idAnimal}`);
     }, erro => {
-      vacinacao.id = this.sync.getIndiceNegativo();
-      let listaVacinas = this.sync.getTodasVacinas();
-      if (listaVacinas) {
-        listaVacinas.push(vacinacao);
-      } else {
-        listaVacinas = [];
-        listaVacinas.push(vacinacao);
-      }
-      localStorage.setItem('vacinas', JSON.stringify(listaVacinas));
-      localStorage.setItem('syncStatus', 'upload');
-      this.toastService.show('O registro de Vacina foi adicionada nas informações do seu bichinho!', 1000, 'green');
-      this.router.navigateByUrl(`/painel/${vacinacao.idAnimal}`);
+      this.salvando = false;
+      this.toastService.show('Não foi possível salvar esse registro de vacina! Por favor, tente novamente mais tarde', 1000, 'red');
     });
   }
 
   carregarAnimais() {
-    if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
-      this.animalService.listar().subscribe(res => {
-        this.listaAnimais = res;
-      }, erro => {
-        this.listaAnimais = this.sync.getTodosAnimais();
-      });
-    } else {
-      this.listaAnimais = this.sync.getTodosAnimais();
-    }
+    this.animalService.listar().subscribe(res => {
+      this.listaAnimais = res;
+    }, erro => {
+    });
   }
 
 }

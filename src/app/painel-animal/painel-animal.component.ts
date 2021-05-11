@@ -30,9 +30,7 @@ export class PainelAnimalComponent implements OnInit {
     private exameService: ExameService,
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
-    private sync: SincronizacaoService,
     private router: Router,
-    private onOffService: OnlineOfflineService
   ) {
     this.innerWidth = window.innerWidth;
    }
@@ -83,9 +81,6 @@ export class PainelAnimalComponent implements OnInit {
 
   carregarAnimal() {
     this.carregando = true;
-    console.log(this.onOffService.isOnline)
-    console.log(this.onOffService.getStatusServidor())
-    // if (this.onOffService.isOnline && this.onOffService.getStatusServidor()) {
       this.animalService.buscar(this.idAnimal).subscribe(res => {
         this.animal = res;
         if (this.animal.idArquivo) {
@@ -97,28 +92,14 @@ export class PainelAnimalComponent implements OnInit {
             () => this.router.navigateByUrl('/meus-bichinhos')
           );
         }
-        console.log(this.idAnimal)
         this.carregarExames();
         this.carregarPesos();
         this.carregarVermifugos();
         this.carregarVacinas();
         this.carregarMedicacoes();
       }, erro => {
-        this.carregarOffline();
         this.carregando = false;
       });
-    // } else {
-    //   this.carregarOffline();
-    // }
-  }
-
-  carregarOffline() {
-    this.animal = this.sync.getAnimal(this.idAnimal);
-    this.listaPeso = this.sync.getPesos(this.idAnimal);
-    this.listaVermifugo = this.sync.getVermifugos(this.idAnimal);
-    this.listaVacina = this.sync.getVacinas(this.idAnimal);
-    this.configurarGrafico();
-    this.carregando = false;
   }
 
   carregarExames() {
@@ -185,7 +166,7 @@ export class PainelAnimalComponent implements OnInit {
           this.toastService.show('Pesagem Excluída!', 1000, 'red');
           this.carregarPesos();
         }, erro => {
-          this.excluirPesoOffline(id);
+          this.toastService.show('Não foi possível excluir essa pesagem! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
@@ -207,7 +188,7 @@ export class PainelAnimalComponent implements OnInit {
           this.toastService.show('Exame Excluído!', 1000, 'red');
           this.carregarExames();
         }, erro => {
-          // this.excluirMedicacaoOffline(id);
+          this.toastService.show('Não foi possível excluir esse exame! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
@@ -229,7 +210,7 @@ export class PainelAnimalComponent implements OnInit {
           this.toastService.show('Medicação Excluída!', 1000, 'red');
           this.carregarMedicacoes();
         }, erro => {
-          this.excluirMedicacaoOffline(id);
+          this.toastService.show('Não foi possível excluir essa medicação! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
@@ -251,7 +232,7 @@ export class PainelAnimalComponent implements OnInit {
           this.toastService.show('Vermifugação Excluída!', 1000, 'red');
           this.carregarVermifugos();
         }, erro => {
-          this.excluirVermifugoOffline(id);
+          this.toastService.show('Não foi possível excluir essa vermifugação! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
@@ -273,56 +254,11 @@ export class PainelAnimalComponent implements OnInit {
           this.toastService.show('Vacina Excluída!', 1000, 'red');
           this.carregarVacinas();
         }, erro => {
-          this.excluirVacinaOffline(id);
+          this.toastService.show('Não foi possível excluir essa vacina! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
   }
 
-  
-  excluirPesoOffline(id) {
-    this.sync.excluirPeso(id);
-    const pesos: any = JSON.parse(localStorage.getItem('pesos'));
-    const index = pesos.findIndex(a => a.id == id );
-    pesos.splice(index, 1);
-    const indexLista = this.listaPeso.findIndex(a => a.id == id );
-    this.listaPeso.splice(indexLista, 1);
-    this.configurarGrafico();
-    localStorage.setItem('pesos', JSON.stringify(pesos));
-    localStorage.setItem('syncStatus', 'update');
-  }
-   
-  excluirMedicacaoOffline(id) {
-    this.sync.excluirMedicacao(id);
-    const medicacoes: any = JSON.parse(localStorage.getItem('medicacoes'));
-    const index = medicacoes.findIndex(a => a.id == id );
-    medicacoes.splice(index, 1);
-    const indexLista = this.listaMedicacao.findIndex(a => a.id == id );
-    this.listaMedicacao.splice(indexLista, 1);
-    localStorage.setItem('medicacoes', JSON.stringify(medicacoes));
-    localStorage.setItem('syncStatus', 'update');
-  }
-  
-  excluirVermifugoOffline(id) {
-    this.sync.excluirVermifugo(id);
-    const vermifugos: any = JSON.parse(localStorage.getItem('vermifugos'));
-    const index = vermifugos.findIndex(a => a.id == id );
-    vermifugos.splice(index, 1);
-    const indexLista = this.listaVermifugo.findIndex(a => a.id == id );
-    this.listaVermifugo.splice(indexLista, 1);
-    localStorage.setItem('vermifugos', JSON.stringify(vermifugos));
-    localStorage.setItem('syncStatus', 'update');
-  }
-  
-  excluirVacinaOffline(id) {
-    this.sync.excluirVacina(id);
-    const vacinas: any = JSON.parse(localStorage.getItem('vacinas'));
-    const index = vacinas.findIndex(a => a.id == id );
-    vacinas.splice(index, 1);
-    const indexLista = this.listaVacina.findIndex(a => a.id == id );
-    this.listaVacina.splice(indexLista, 1);
-    localStorage.setItem('vacinas', JSON.stringify(vacinas));
-    localStorage.setItem('syncStatus', 'update');
-  }
 
 }
