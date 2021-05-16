@@ -19,7 +19,55 @@
 <div *ngIf="!carregando">
 
   
-  <section id="secao-medicacoes">
+  <section id="secao-antipulga">
+    <div class="yellow-text text-darken-1 center-align">
+      <h4>Antipulgas</h4>
+    </div>
+
+    <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaAntiPulga.length === 0">
+      <p>
+        Ainda não encontramos nenhum registro de antipulgas para o seu bichinho, clique no botão abaixo para
+        adicionar.
+      </p>
+    </div>
+
+    <div *ngIf="!carregando && listaAntiPulga.length > 0">
+      <div class="row">
+        <div class="col s12 m6  " *ngFor="let item of listaAntiPulga">
+          <div class="card">
+            <div class="card-content ">
+              <div class="row no-margin-bottom">
+                <div class="col s10 m10  no-padding">
+                  <span class="card-title">Antipulga: <strong>{{ item.nome }}</strong> </span>
+                </div>
+                <div class="col s2 m2 no-padding">
+                  <div class="red-text right-align ">
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirAntiPulga(item.id)"></i>
+                  </div>
+                </div>
+
+                <div class="col s12 m6  no-padding">
+                  Data da Aplicação: <strong>{{ item.dataAntiPulga | date: 'dd/MM/yyyy' }}</strong><br>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-align">
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/antipulga'"
+        [queryParams]="{ animal: idAnimal }">
+        Registrar Antipulga
+      </a>
+    </div>
+    <br>
+  </section>
+  <hr>
+
+  <section id="secao-exames">
     <div class="yellow-text text-darken-1 center-align">
       <h4>Exames Realizados</h4>
     </div>

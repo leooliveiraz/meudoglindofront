@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class OnlineOfflineService {
   private statusConexao$ = new Subject<boolean>();
-  private statusServidor = false;
+  public statusServidor = false;
 
   private urlStatusServidor = `${environment.API_URL}server/status`;
 

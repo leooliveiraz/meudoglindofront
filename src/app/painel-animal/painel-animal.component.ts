@@ -9,10 +9,9 @@ import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import { VacinaService } from '../service/vacina.service';
-import { SincronizacaoService } from '../service/sincronizacao.service';
-import { OnlineOfflineService } from '../service/online-offline.service';
 import { MedicarService } from '../service/medicar.service';
 import { ExameService } from '../service/exame.service';
+import { AntiPulgaService } from '../service/antiPulga.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -24,6 +23,7 @@ export class PainelAnimalComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private pesoService: PesoService,
+    private antiPulgaService: AntiPulgaService,
     private vermifugoService: VermifugoService,
     private vacinaService: VacinaService,
     private medicacaoService: MedicarService,
@@ -45,7 +45,9 @@ export class PainelAnimalComponent implements OnInit {
   listaVacina: any = [];
   listaMedicacao: any = [];
   listaExame: any = [];
-  public innerWidth: any;
+  listaAntiPulga: any = [];
+
+  public innerWidth: any = 900;
   public lineChartData: any[] = [
     { data: [], label: '' },
   ];
@@ -93,6 +95,7 @@ export class PainelAnimalComponent implements OnInit {
             () => this.router.navigateByUrl('/meus-bichinhos')
           );
         }
+        this.carregarAntiPulgas();
         this.carregarExames();
         this.carregarPesos();
         this.carregarVermifugos();
@@ -136,6 +139,13 @@ export class PainelAnimalComponent implements OnInit {
   carregarMedicacoes() {
     this.medicacaoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaMedicacao = res;
+      this.carregando = false;
+    }, erro => this.carregando = false);
+  }
+  
+  carregarAntiPulgas() {
+    this.antiPulgaService.listarPorAnimal(this.idAnimal).subscribe(res => {
+      this.listaAntiPulga= res;
       this.carregando = false;
     }, erro => this.carregando = false);
   }
@@ -256,6 +266,28 @@ export class PainelAnimalComponent implements OnInit {
           this.carregarVacinas();
         }, erro => {
           this.toastService.show('Não foi possível excluir essa vacina! Tente novamente mais tarde', 1000, 'red');
+        });
+      }
+    });
+  }
+
+  excluirAntiPulga(id) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Ao confirmar essa ação, você concorda em excluir esse registro.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim'
+    }).then((result) => {
+      if (result.value) {
+        this.antiPulgaService.deletar(id).subscribe(res => {
+          this.toastService.show('Registro de excluído!', 1000, 'red');
+          this.carregarAntiPulgas();
+        }, erro => {
+          this.toastService.show('Não foi possível excluir esse registro! Tente novamente mais tarde', 1000, 'red');
         });
       }
     });
