@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { VermifugoService } from '../service/vermifugo.service';
 import Swal from 'sweetalert2';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-vermifugar',
@@ -20,7 +21,10 @@ export class VermifugarComponent implements OnInit {
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) { }
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Cadastro de Vermifugos');
+  }
   
   idAnimal: number = null;
   nome = null;

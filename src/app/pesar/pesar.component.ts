@@ -5,6 +5,7 @@ import { MzToastService } from 'ngx-materialize';
 import { Router,ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-pesar',
@@ -18,7 +19,10 @@ export class PesarComponent implements OnInit {
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) { }
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Cadastro do Peso do seu Pet');
+  }
   idAnimal: number = null;
   peso: number = null;
   dataPesagem = '';

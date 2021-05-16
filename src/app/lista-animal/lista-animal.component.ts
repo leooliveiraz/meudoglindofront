@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnimalService } from '../service/animal.service';
 import Swal from 'sweetalert2';
 import { MzToastService } from 'ngx-materialize';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-lista-animal',
@@ -13,7 +14,11 @@ export class ListaAnimalComponent implements OnInit {
 
   constructor(
     private service: AnimalService,
-    private toastService: MzToastService) { }
+    private toastService: MzToastService,
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Meus Bichinhos');
+  }
 
   lista: any = [];
   carregando = false;

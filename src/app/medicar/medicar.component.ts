@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { MedicarService } from '../service/medicar.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-medicar',
@@ -18,8 +19,11 @@ export class MedicarComponent implements OnInit {
     private medicarService: MedicarService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Registro de Medicamentos');
+  }
   
   idAnimal: number = null;
   nome = null;

@@ -5,6 +5,7 @@ import { MzToastService } from 'ngx-materialize';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { SincronizacaoService } from '../service/sincronizacao.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-cadastar-animal',
@@ -17,7 +18,10 @@ export class CadastarAnimalComponent implements OnInit {
               private toastService: MzToastService,
               private router: Router,
               private activateRoute: ActivatedRoute,
-              private sync: SincronizacaoService ) { }
+              private sync: SincronizacaoService,
+              private seo: SeoService ) { 
+      seo.addTitulo('Meu Pet Lindo - Cadastre seu animalzinho!');
+  }
 
     diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
     mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' , 'Dezembro' ];

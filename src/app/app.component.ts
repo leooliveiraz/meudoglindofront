@@ -9,6 +9,7 @@ import { MzToastService } from 'ngx-materialize';
 import { filter } from 'rxjs/operators';
 
 import { AppService } from './service/app.service';
+import { SeoService } from './service/seo.service';
 declare let gtag: Function;
 
 @Component({
@@ -17,7 +18,7 @@ declare let gtag: Function;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'MeuDogLindo';
+  title = 'MeuPetLindo';
   estaLogado = false;
 
   constructor(private router: Router,
@@ -27,8 +28,9 @@ export class AppComponent implements OnInit {
     private swPush: SwPush,
     private appService: AppService,
     public onOffService: OnlineOfflineService,
-    private sincronizacaoService: SincronizacaoService,) {
-    
+    private sincronizacaoService: SincronizacaoService,
+    private seo: SeoService) {
+      seo.addTitulo('Meu Pet Lindo - O APP do seu PET');
       this.serverOnline();
       setInterval(()  => {
         this.serverOnline();

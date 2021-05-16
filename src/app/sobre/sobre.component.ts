@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-sobre',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SobreComponent implements OnInit {
 
-  constructor() { }
+  constructor(private seo: SeoService
+    ) { 
+        seo.addTitulo('Meu Pet Lindo - Sobre o App');
+    }
 
   ngOnInit() {
   }

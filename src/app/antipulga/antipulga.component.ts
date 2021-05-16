@@ -6,6 +6,7 @@ import { ExameService } from '../service/exame.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AntiPulgaService } from '../service/antiPulga.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-antipulga',
@@ -19,8 +20,11 @@ export class AntipulgaComponent implements OnInit {
     private antiPulgaService: AntiPulgaService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Registro de Antipulga');
+  }
   
   idAnimal: number = null;
   nome = null;

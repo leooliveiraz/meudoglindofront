@@ -6,6 +6,7 @@ import { VacinaService } from '../service/vacina.service';
 import { SincronizacaoService } from '../service/sincronizacao.service';
 import { OnlineOfflineService } from '../service/online-offline.service';
 import Swal from 'sweetalert2';
+import { SeoService } from '../service/seo.service';
 
 
 @Component({
@@ -21,7 +22,10 @@ export class VacinaComponent implements OnInit {
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) { }
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Registro de Vacinas');
+  }
 
   idAnimal: number = null;
   nome = null;

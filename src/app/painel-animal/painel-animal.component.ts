@@ -12,6 +12,7 @@ import { VacinaService } from '../service/vacina.service';
 import { MedicarService } from '../service/medicar.service';
 import { ExameService } from '../service/exame.service';
 import { AntiPulgaService } from '../service/antiPulga.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-painel-animal',
@@ -31,7 +32,9 @@ export class PainelAnimalComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastService: MzToastService,
     private router: Router,
+    private seo: SeoService
   ) {
+    this.seo.addTitulo('Meu Pet Lindo - Painel do seu Bichinho')
     this.innerWidth = window.innerWidth;
    }
 

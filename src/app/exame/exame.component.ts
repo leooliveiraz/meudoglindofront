@@ -5,6 +5,7 @@ import { MzToastService } from 'ngx-materialize';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AnimalService } from '../service/animal.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-exame',
@@ -18,9 +19,11 @@ export class ExameComponent implements OnInit {
     private exameService: ExameService,
     private toastService: MzToastService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
-  
+    private router: Router,
+    private seo: SeoService
+  ) { 
+      seo.addTitulo('Meu Pet Lindo - Cadastro de Exames do seu bichinho');
+  }
   idAnimal: number = null;
   nome = null;
   dataMedicamento = '';

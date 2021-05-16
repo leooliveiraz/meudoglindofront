@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthorizationService } from '../service/auth.service';
+import { SeoService } from '../service/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,12 @@ import { AuthorizationService } from '../service/auth.service';
 })
 export class HomeComponent implements OnInit {
   estaLogado = false;
-  constructor(private authService: AuthorizationService) {}
+  constructor(
+    private authService: AuthorizationService,
+    private seo: SeoService
+    ) { 
+        seo.addTitulo('Meu Pet Lindo - O APP do seu PET');
+    }
 
   ngOnInit() {
     this.estaLogado = this.authService.estaLogado();
