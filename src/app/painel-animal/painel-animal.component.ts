@@ -127,7 +127,6 @@ export class PainelAnimalComponent implements OnInit {
   carregarVermifugos() {
     this.vermifugoService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaVermifugo = res;
-      this.configurarGrafico();
     }, erro => this.carregando = false);
   }
 
@@ -135,7 +134,6 @@ export class PainelAnimalComponent implements OnInit {
     this.vacinaService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaVacina = res;
       this.carregando = false;
-      this.configurarGrafico();
     }, erro => this.carregando = false);
   }
   
@@ -158,9 +156,15 @@ export class PainelAnimalComponent implements OnInit {
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
     for (const item of this.listaPeso) {
+      console.log(item)
       this.lineChartData[0].data.push(item.peso);
       this.lineChartLabels.push( new DatePipe('en-US').transform(item.dataPesagem, 'dd/MM/yy') );
     }
+    this.listaPeso.sort(function(a, b)
+    {
+       if (a.dataPesagem > b.dataPesagem) return -1;
+       if (a.dataPesagem < b.dataPesagem) return 1;
+    })
   }
 
 
