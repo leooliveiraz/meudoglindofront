@@ -6,8 +6,10 @@ import { AuthorizationService } from './service/auth.service';
 import { SwUpdate, SwPush, } from '@angular/service-worker';
 import { OnlineOfflineService } from './service/online-offline.service';
 import { MzToastService } from 'ngx-materialize';
+import { filter } from 'rxjs/operators';
 
 import { AppService } from './service/app.service';
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit {
         } else {
           this.toastService.show('Sem conexão com a internet no momento.', 1000, 'red');
       }
+      
     });
 
     this.router.events.subscribe((event: Event) => {
@@ -45,6 +48,9 @@ export class AppComponent implements OnInit {
         if (this.estaLogado) {
           this.sincronizacaoService.syncPull();
         }
+        gtag('event', 'page_view', {
+          page_path: event.urlAfterRedirects
+        })
       }
     });
     

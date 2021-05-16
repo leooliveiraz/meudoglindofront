@@ -20,7 +20,7 @@ export class LogoutComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.sync.syncClean();
+    // this.sync.syncClean();
     this.router.navigateByUrl('/');
   }
 

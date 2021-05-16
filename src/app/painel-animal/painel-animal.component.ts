@@ -156,7 +156,6 @@ export class PainelAnimalComponent implements OnInit {
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
     for (const item of this.listaPeso) {
-      console.log(item)
       this.lineChartData[0].data.push(item.peso);
       this.lineChartLabels.push( new DatePipe('en-US').transform(item.dataPesagem, 'dd/MM/yy') );
     }
