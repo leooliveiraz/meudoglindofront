@@ -24,7 +24,7 @@ export class AntipulgaComponent implements OnInit {
   
   idAnimal: number = null;
   nome = null;
-  dataMedicamento = '';
+  dataAntiPulga = '';
   dataProxima = '';
   urlImagem = `${environment.API_URL}arquivo/979FEB8D61425164740D8D5739758DFDFE945CC59A9BFECB0ED602E13A6303AF`;
 

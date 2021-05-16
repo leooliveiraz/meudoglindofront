@@ -71,6 +71,9 @@ export class PainelAnimalComponent implements OnInit {
         {
           id: 'y-axis-0',
           position: 'left',
+          ticks: {
+            beginAtZero: true
+          }
         },
 
       ]
