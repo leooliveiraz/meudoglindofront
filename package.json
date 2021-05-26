@@ -26,7 +26,7 @@
     "@sweetalert2/theme-material-ui": "^3.1.4",
     "angular-cli-ghpages": "^0.6.2",
     "angularx-social-login": "^2.2.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "ng2-charts": "^2.3.0",
     "ngx-image-cropper": "^2.1.2",
     "ngx-materialize": "^6.1.3",
