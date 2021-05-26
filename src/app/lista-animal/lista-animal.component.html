@@ -2,7 +2,7 @@
 <div class="white-text text-darken-1 center-align" *ngIf="carregando">
   Por favor aguarde, estamos carregando as informações dos seus bichinhos.
 </div>
-<mz-collection *ngIf="lista != null && lista.length > 0" class="collection">
+<mz-collection *ngIf="(lista != null && lista.length > 0) || (listaCompartilhados != null && listaCompartilhados.length > 0)" class="collection">
   <mz-collection-item *ngFor="let item of lista" [avatar]="true">
     <img mz-avatar width="48" class="img" [src]=" item.srcImg ? item.srcImg : (item.idArquivo ? urlImagem+item.idArquivo : 'assets/icons/animals-allowed.png')"  >
     
