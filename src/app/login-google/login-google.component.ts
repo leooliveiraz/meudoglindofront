@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { AuthorizationService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
@@ -12,6 +12,9 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 export class LoginGoogleComponent implements OnInit {
 
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
+  @Input() redirecionarAoLogar = true;
+  @Output() autenticou : EventEmitter<any> = new EventEmitter();
+
   auth2: any;
   constructor(
     private authService: AuthorizationService
@@ -21,7 +24,7 @@ export class LoginGoogleComponent implements OnInit {
   }
 
   loginGoogle(): void {
-    this.authService.loginComGoogle();
+    this.authService.loginComGoogle(this.redirecionarAoLogar, this.autenticou);
   }
 
 

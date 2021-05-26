@@ -1,0 +1,18 @@
+p{
+  font-size: larger;
+}
+
+.img{
+  margin-top: 2em;
+  border-width: .5em;
+  border-style: solid;
+  border-color: blueviolet;
+  width: 200px;
+}
+
+h4{
+  font-family: 'passion_one';
+}
+.btn{
+  margin: 0px 1em;
+}

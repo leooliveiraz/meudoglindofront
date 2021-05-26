@@ -39,4 +39,8 @@ export class AnimalService {
     return  this.http.get(`${this.url}`, { headers: headers });
   }
 
+  listarCompartilhados() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return  this.http.get(`${this.url}/compartilhados`, { headers: headers });
+  }
 }

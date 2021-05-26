@@ -26,8 +26,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaAntiPulga.length === 0">
       <p>
-        Ainda não encontramos nenhum registro de antipulgas para o seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span>Ainda não encontramos nenhum registro de antipulgas para esse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col s2 m2 no-padding">
                   <div class="red-text right-align ">
-                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirAntiPulga(item.id)"></i>
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirAntiPulga(item.id)"  *ngIf="animal.dono"></i>
                   </div>
                 </div>
 
@@ -58,7 +58,7 @@
     </div>
 
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/antipulga'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/antipulga'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Registrar Antipulga
       </a>
@@ -74,8 +74,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaExame.length === 0">
       <p>
-        Ainda não encontramos nenhum registro de exame do seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span>Ainda não encontramos nenhum registro de exame desse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col s2 m2 no-padding">
                   <div class="red-text right-align ">
-                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirExame(item.id)"></i>
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirExame(item.id)"  *ngIf="animal.dono"></i>
                   </div>
                 </div>
 
@@ -106,7 +106,7 @@
     </div>
 
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/exame'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/exame'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Registrar Exame
       </a>
@@ -122,8 +122,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaMedicacao.length === 0">
       <p>
-        Ainda não encontramos nenhum registro de medicação do seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span> Ainda não encontramos nenhum registro de medicação para esse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col s2 m2 no-padding">
                   <div class="red-text right-align ">
-                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirMedicacao(item.id)"></i>
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirMedicacao(item.id)"  *ngIf="animal.dono"></i>
                   </div>
                 </div>
 
@@ -157,7 +157,7 @@
     </div>
 
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/medicar'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/medicar'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Medicar
       </a>
@@ -173,8 +173,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaVacina.length === 0">
       <p>
-        Ainda não encontramos nenhum registro de vacina do seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span> Ainda não encontramos nenhum registro de vacina para esse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col s2 m2 no-padding">
                   <div class="red-text right-align ">
-                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirVacina(item.id)"></i>
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirVacina(item.id)"  *ngIf="animal.dono"></i>
                   </div>
                 </div>
 
@@ -208,7 +208,7 @@
     </div>
 
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/vacinar'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/vacinar'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Vacinar
       </a>
@@ -225,8 +225,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaVermifugo.length === 0">
       <p>
-        Não encontramos nenhum registro de pesagem para o seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span> Não encontramos nenhum registro de pesagem para esse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -241,7 +241,7 @@
                 </div>
                 <div class="col s2 m2 no-padding">
                   <div class="red-text right-align ">
-                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirVermifugo(item.id)"></i>
+                    <i mz-icon-mdi [icon]="'delete'" (click)="excluirVermifugo(item.id)"  *ngIf="animal.dono"></i>
                   </div>
                 </div>
 
@@ -260,7 +260,7 @@
     </div>
 
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/vermifugar'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/vermifugar'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Vermifugar
       </a>
@@ -277,8 +277,8 @@
 
     <div class="white-text text-darken-1 center-align" *ngIf="!carregando && listaPeso.length === 0">
       <p>
-        Parece que você ainda não adicionou um registro de pesagem para o seu bichinho, clique no botão abaixo para
-        adicionar.
+        <span>Parece que você ainda não adicionou um registro de pesagem para esse bichinho.</span>
+        <span *ngIf="animal.dono"> Clique no botão abaixo para adicionar.</span>
       </p>
     </div>
 
@@ -287,7 +287,7 @@
         [options]="lineChartOptions" [chartType]="'line'"></canvas>
     </div>
     <div class="right-align">
-      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/pesar'"
+      <a mz-button class="orange accent-3 white-text" [float]='false' [routerLink]="'/pesar'" *ngIf="animal.dono"
         [queryParams]="{ animal: idAnimal }">
         Pesar
       </a>
@@ -296,8 +296,8 @@
     <mz-collection *ngIf="listaPeso != null && listaPeso.length > 0">
       <mz-collection-item *ngFor="let item of listaPeso">
         Data: {{ item.dataPesagem | date: 'dd/MM/yyyy' }}, Peso: {{ item.peso }}
-        <a class="red-text pointer" (click)="excluirPeso(item.id)" mz-secondary-content>
-          <i mz-icon-mdi [icon]="'delete'"></i></a>
+        <a class="red-text pointer" (click)="excluirPeso(item.id)" mz-secondary-content *ngIf="animal.dono">
+          <i mz-icon-mdi [icon]="'delete'"  ></i></a>
       </mz-collection-item>
 
     </mz-collection>

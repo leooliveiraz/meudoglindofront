@@ -67,7 +67,7 @@ export class PesarComponent implements OnInit {
       this.toastService.show('A pesagem foi adicionada nas informações do seu bichinho!', 1000, 'green');
       this.router.navigateByUrl(`/painel/${pesagem.idAnimal}`);
     }, erro => {
-      console.log(erro)
+      console.error(erro)
       this.salvando = false;
       this.toastService.show('Não foi possível salvar o peso do seu bichinho! Tente novamente mais tarde', 1000, 'red');
     });

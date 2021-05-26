@@ -116,7 +116,7 @@ export class PainelAnimalComponent implements OnInit {
     this.exameService.listarPorAnimal(this.idAnimal).subscribe(res => {
       this.listaExame = res;
       this.carregando = false;
-    }, erro => console.log(erro));
+    }, erro => console.error(erro));
   }
 
   carregarPesos() {

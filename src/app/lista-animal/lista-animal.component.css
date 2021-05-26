@@ -24,3 +24,16 @@
 ::ng-deep .collection {
           border: 0px;
 }
+.chip-separator {
+  margin-top: -0.8em;
+  margin-left: 1em;
+  line-height: 22px;
+  height: 20px;
+  font-size: 12px;
+  z-index: 10;
+}
+
+.collection{
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}

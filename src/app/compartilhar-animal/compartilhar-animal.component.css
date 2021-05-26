@@ -1,0 +1,19 @@
+.cabecalho{
+  margin-bottom: .5em;
+}
+
+.img{
+  border-width: .4em;
+  border-style: solid;
+  border-color: blueviolet;
+}
+
+.botao-compartilhamento{
+  height: 6em;
+  text-align: center;
+  width: 10em;
+  margin: .5em 0px
+}
+.modal{
+  max-height: 80%;
+}

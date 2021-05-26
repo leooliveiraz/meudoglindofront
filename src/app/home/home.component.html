@@ -15,4 +15,4 @@
 
 </div>
 
-<app-login-google *ngIf="!estaLogado"></app-login-google>
+<app-login-google *ngIf="!estaLogado" (autenticou)="autenticou()"></app-login-google>

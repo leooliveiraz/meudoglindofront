@@ -1,0 +1,50 @@
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [fullscreen]="false" >
+  <mz-modal-header>
+    <div class="center cabecalho">
+      <h4>{{animal.nome}}</h4>
+    </div>
+  </mz-modal-header>
+  <mz-modal-content>
+    <div class="center" > 
+      <img mz-avatar width="164" class="img" [src]=" animal.srcImg ? animal.srcImg : (animal.idArquivo ? urlImagem+animal.idArquivo : 'assets/icons/animals-allowed.png')"  >
+    
+      
+      <div *ngIf="codigoCompartilhamento"> 
+        
+        <p>Link de compartilhamento gerado.<br>Compartilhe as informações do seu pet com outra pessoa.</p>
+        <p>
+          <strong><span id="codigoCompartilhamento">{{urlCompartilhamento}}<br class="mobile">{{codigoCompartilhamento}}</span></strong>
+        </p>
+        <div>
+          <button mz-button [flat]="true" (click)="copiar()" >
+            <i mz-icon-mdi [align]="'left'" [icon]="'content-copy'" > </i>
+            Copiar
+          </button>
+          <button mz-button [flat]="true" (click)="compartilhar()"  >
+            <i mz-icon-mdi [align]="'left'" [icon]="'share-variant'" > </i>
+            Compartilhar
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!codigoCompartilhamento"> 
+        <p>Aguarde, estamos gerando o link de compartilhamento.</p>
+        <br>
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-yellow-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Fechar</button>
+  </mz-modal-footer>
+</mz-modal>

@@ -1,0 +1,33 @@
+<div class=" center-align">
+  <mz-card class="" [horizontal]="true" [hoverable]="true" >
+    <mz-card-content >
+      <p>
+        <strong>{{dados.nomeDono}}</strong> quer compartilhar informações de um animalzinho com você!<br>
+      </p>      
+      <img mz-avatar  class="img" [src]=" srcImg"  >
+      <h4>{{dados.nomeAnimal}}</h4>
+
+      <p *ngIf="estaLogado">
+        Clique no botão <strong>Adicionar</strong> para adicionar o animalzinho a sua lista, ou em <strong>Sair</strong> para cancelar. 
+      </p>
+
+      <p *ngIf="!estaLogado">
+        Para ver as informações do animalzinho, você precisa estar logado.<br>
+        Entre com sua conta, clicando no botão abaixo!
+      </p>
+
+
+      <br>
+    </mz-card-content>
+    <mz-card-action >
+      <app-login-google *ngIf="!estaLogado" [redirecionarAoLogar]="false" (autenticou)="autenticou()" ></app-login-google>
+      <a class="white-text green btn btn-large waves-effect waves-light"  *ngIf="estaLogado" 
+        (click)="confirmar()" >Adicionar</a>
+      <a class="white-text red btn btn-large waves-effect waves-light"  *ngIf="estaLogado" 
+        [routerLink]="['/']">Sair</a>
+    </mz-card-action>
+
+  </mz-card>
+
+
+</div>

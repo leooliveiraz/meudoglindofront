@@ -11,6 +11,7 @@ import { MzSidenavModule, MzDatepickerModule, MzCheckboxModule } from 'ngx-mater
 import { MzIconModule, MzIconMdiModule } from 'ngx-materialize';
 import { MzInputModule } from 'ngx-materialize';
 import { MzNavbarModule } from 'ngx-materialize';
+import { MzCardModule } from 'ngx-materialize'
 import { MzButtonModule } from 'ngx-materialize';
 import { MzToastModule } from 'ngx-materialize';
 import { MzModalModule } from 'ngx-materialize';
@@ -41,7 +42,8 @@ import { MedicarComponent } from './medicar/medicar.component';
 import { ExameComponent } from './exame/exame.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AntipulgaComponent } from './antipulga/antipulga.component';
-
+import { CompartilharAnimalComponent } from './compartilhar-animal/compartilhar-animal.component';
+import { AdicionarAnimalCompartilhadoComponent } from './adicionar-animal-compartilhado/adicionar-animal-compartilhado.component';
 
 const config = new AuthServiceConfig([
   {
@@ -76,6 +78,8 @@ export function provideConfig() {
     ExameComponent,
     LoadingComponent,
     AntipulgaComponent,
+    CompartilharAnimalComponent,
+    AdicionarAnimalCompartilhadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,9 +101,13 @@ export function provideConfig() {
     MzSelectModule,
     MzCheckboxModule ,
     MzModalModule,
+    MzCardModule,
     ChartsModule,
     ImageCropperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
+  entryComponents: [
+    CompartilharAnimalComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

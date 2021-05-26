@@ -96,3 +96,39 @@ h1 {
 h1{
   font-family: 'passion_one','fredoka_one';
 }
+h2{
+  font-family: 'passion_one','fredoka_one';
+}
+h3{
+  font-family: 'passion_one','fredoka_one';
+}
+h4{
+  font-family: 'passion_one','fredoka_one';
+}
+h5{
+  font-family: 'passion_one','fredoka_one';
+}
+h6{
+  font-family: 'passion_one','fredoka_one';
+}
+
+
+.desktop{
+  display: inline;
+}
+
+.mobile{
+  display: none;
+}
+
+
+@media (max-width: 899px) {
+  .desktop{
+    display: none;
+  }
+
+  .mobile{
+    display: inline;
+  }
+  
+}

@@ -1,5 +1,5 @@
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -11,11 +11,12 @@ export class AuthorizationService {
     private socialService: AuthService,
     private router: Router) { }
 
-  loginComGoogle() {
+  loginComGoogle(redirecionar, eventEmitter: EventEmitter<any>) {
     this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID)
     .then(res => {
       this.guardarAutenticacao(res);
-      this.router.navigateByUrl('/meus-bichinhos');
+      if(eventEmitter)
+        eventEmitter.emit();
     });
   }
 

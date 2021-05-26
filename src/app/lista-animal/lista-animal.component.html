@@ -2,17 +2,42 @@
 <div class="white-text text-darken-1 center-align" *ngIf="carregando">
   Por favor aguarde, estamos carregando as informações dos seus bichinhos.
 </div>
-<mz-collection *ngIf="lista != null && lista.length > 0">
+<mz-collection *ngIf="lista != null && lista.length > 0" class="collection">
   <mz-collection-item *ngFor="let item of lista" [avatar]="true">
     <img mz-avatar width="48" class="img" [src]=" item.srcImg ? item.srcImg : (item.idArquivo ? urlImagem+item.idArquivo : 'assets/icons/animals-allowed.png')"  >
+    
     <div class="pointer animal" [routerLink]="['/painel/'+item.id]"> {{ item.nome }}</div>
+
     <a class="red-text pointer icone" (click)="excluir(item.id)" mz-secondary-content>
       <i mz-icon-mdi [icon]="'delete'"></i></a>
+
+    <a class="pointer icone" (click)="abrirCompartilhamento(item)" mz-secondary-content>
+        <i mz-icon-mdi [icon]="'share-variant'"></i></a>
+
     <a [routerLink]="['/editar/'+item.id]" class="green-text icone" mz-secondary-content><i mz-icon-mdi
         [icon]="'square-edit-outline'"></i></a>
 
-    <a [routerLink]="['/painel/'+item.id]" class="deep-purple-text text-darken-4 icone" mz-secondary-content><i mz-icon-mdi
-        [icon]="'chart-bell-curve-cumulative'"></i></a>
+    <a [routerLink]="['/painel/'+item.id]" class="deep-purple-text text-darken-4 icone " mz-secondary-content><i mz-icon-mdi
+        [icon]="'open-in-new'"></i></a>
+
+  </mz-collection-item>
+
+  <mz-collection-item *ngFor="let item of listaCompartilhados" [avatar]="true">
+    
+    <img mz-avatar width="48" class="img" [src]=" item.srcImg ? item.srcImg : (item.idArquivo ? urlImagem+item.idArquivo : 'assets/icons/animals-allowed.png')"  >
+    
+    <div class="pointer animal" [routerLink]="['/painel/'+item.id]"> 
+      <span> {{ item.nome }} </span>
+      <div class="chip chip-separator  yellow purple-text darken-4-text" >
+        Compartilhado
+      </div>
+    </div>
+    
+
+    <a [routerLink]="['/painel/'+item.id]" class="deep-purple-text text-darken-4 icone" mz-secondary-content>
+      
+      <i mz-icon-mdi
+        [icon]="'open-in-new'"></i></a>
 
   </mz-collection-item>
 

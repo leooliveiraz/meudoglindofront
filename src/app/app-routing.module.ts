@@ -12,6 +12,7 @@ import { VacinaComponent } from './vacina/vacina.component';
 import { MedicarComponent } from './medicar/medicar.component';
 import { ExameComponent } from './exame/exame.component';
 import { AntipulgaComponent } from './antipulga/antipulga.component';
+import { AdicionarAnimalCompartilhadoComponent } from './adicionar-animal-compartilhado/adicionar-animal-compartilhado.component';
 
 
 const routes: Routes = [
@@ -20,12 +21,14 @@ const routes: Routes = [
   { path: 'editar/:id', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'meus-bichinhos', component: ListaAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'medicar', component: MedicarComponent, canActivate: [AuthGuardService] },
+  { path: 'painel/compartilhado/:codigo', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'painel/:idAnimal', component: PainelAnimalComponent, canActivate: [AuthGuardService] },
   { path: 'pesar', component: PesarComponent, canActivate: [AuthGuardService] },
   { path: 'vermifugar', component: VermifugarComponent, canActivate: [AuthGuardService] },
   { path: 'vacinar', component: VacinaComponent, canActivate: [AuthGuardService] },
   { path: 'antipulga', component: AntipulgaComponent, canActivate: [AuthGuardService] },
   { path: 'exame', component: ExameComponent, canActivate: [AuthGuardService] },
+  { path: 'compartilhar/:codigo', component: AdicionarAnimalCompartilhadoComponent },
   { path: 'sobre', component: SobreComponent },
 ];
 
