@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { RodapeComponent } from './rodape/rodape.component';
 import { ChartsModule } from 'ng2-charts';
-import { MzSidenavModule, MzDatepickerModule, MzCheckboxModule } from 'ngx-materialize';
+import { MzSidenavModule, MzDatepickerModule, MzCheckboxModule, MzTooltipModule } from 'ngx-materialize';
 import { MzIconModule, MzIconMdiModule } from 'ngx-materialize';
 import { MzInputModule } from 'ngx-materialize';
 import { MzNavbarModule } from 'ngx-materialize';
@@ -100,6 +100,7 @@ export function provideConfig() {
     MzToastModule,
     MzSelectModule,
     MzCheckboxModule ,
+    MzTooltipModule ,
     MzModalModule,
     MzCardModule,
     ChartsModule,

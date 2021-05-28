@@ -1,21 +1,24 @@
-<app-imagem-animal [src]="srcImg"></app-imagem-animal>
-<h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
-<div class="yellow-text text-darken-1 center-align info" id="data-nascimento" *ngIf="animal?.dataNascimento">
-  <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'" ></i>
-  {{animal?.dataNascimento | date: 'dd/MM/yyyy' }}
-</div>
-<div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataAdocao"  id="data-adocao">
-  <i mz-icon-mdi [align]="'center'" [icon]="'home-heart'" [size]="'large'" ></i>
-  {{animal?.dataAdocao | date: 'dd/MM/yyyy' }}
-</div>
-<div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataObito" id="data-obito">
-  <i mz-icon-mdi [align]="'center'" [icon]="'star'" [size]="'large'"></i>
-  {{animal?.dataObito | date: 'dd/MM/yyyy' }}
-</div>
-<br>
-<div class="white-text text-darken-1 center-align" *ngIf="carregando">
-  Por favor aguarde, estamos carregando as informações do seu bichinho.
-</div>
+
+<section id="secao-info">
+  <app-imagem-animal [src]="srcImg"></app-imagem-animal>
+  <h1 class="yellow-text text-darken-1 center-align">{{animal?.nome}}</h1>
+  <div class="yellow-text text-darken-1 center-align info" id="data-nascimento" *ngIf="animal?.dataNascimento">
+    <i mz-icon-mdi [align]="'center'" [icon]="'cake-variant'" [size]="'large'" ></i>
+    {{animal?.dataNascimento | date: 'dd/MM/yyyy' }}
+  </div>
+  <div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataAdocao"  id="data-adocao">
+    <i mz-icon-mdi [align]="'center'" [icon]="'home-heart'" [size]="'large'" ></i>
+    {{animal?.dataAdocao | date: 'dd/MM/yyyy' }}
+  </div>
+  <div class="yellow-text text-darken-1 center-align info" *ngIf="animal?.dataObito" id="data-obito">
+    <i mz-icon-mdi [align]="'center'" [icon]="'star'" [size]="'large'"></i>
+    {{animal?.dataObito | date: 'dd/MM/yyyy' }}
+  </div>
+  <br>
+  <div class="white-text text-darken-1 center-align" *ngIf="carregando">
+    Por favor aguarde, estamos carregando as informações do seu bichinho.
+  </div>
+</section>
 <div *ngIf="!carregando">
 
   
@@ -304,4 +307,50 @@
     <br>
   </section>
 
+</div>
+
+<div class="nav-lateral yellow darken-1 center" *ngIf="!carregando">
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-info'"
+      mz-tooltip tooltip="Informações" [position]="'left'">
+      <i mz-icon-mdi [icon]="'dog'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-antipulga'" 
+      mz-tooltip tooltip="Antipulgas" [position]="'left'">
+      <i mz-icon-mdi [icon]="'bottle-tonic-plus'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-exames'" 
+      mz-tooltip tooltip="Exames" [position]="'left'">
+      <i mz-icon-mdi [icon]="'microscope'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-medicacoes'" 
+      mz-tooltip tooltip="Medicações" [position]="'left'">
+      <i mz-icon-mdi [icon]="'pill'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-vacina'" 
+      mz-tooltip tooltip="Vacinas" [position]="'left'" >
+      <i mz-icon-mdi [icon]="'needle'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item nav-lateral-sep" >
+    <a  [routerLink]='"."' [fragment]="'secao-vermifugacoes'" 
+      mz-tooltip tooltip="Vermifugações" [position]="'left'">
+      <i mz-icon-mdi [icon]="'bacteria'"  ></i>
+    </a>
+  </div>
+  <div class="nav-lateral-item" >
+    <a  [routerLink]='"."' [fragment]="'secao-peso'"
+      mz-tooltip tooltip="Peso" [position]="'left'" >
+      <i mz-icon-mdi [icon]="'scale'"  ></i>
+    </a>
+  </div>
+  
 </div>
