@@ -32,9 +32,15 @@ const routes: Routes = [
   { path: 'sobre', component: SobreComponent },
 ];
 const routerOptions: ExtraOptions = {
-  scrollPositionRestoration: 'enabled',
-  anchorScrolling: 'enabled',
-  scrollOffset: [0, 64],
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    scrollOffset: [0, 64],
+    relativeLinkResolution: 'legacy'
+}{
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    scrollOffset: [0, 64],
+    relativeLinkResolution: 'legacy'
 };
 
 
