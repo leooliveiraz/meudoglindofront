@@ -15,6 +15,13 @@ import { AntipulgaComponent } from './antipulga/antipulga.component';
 import { AdicionarAnimalCompartilhadoComponent } from './adicionar-animal-compartilhado/adicionar-animal-compartilhado.component';
 
 
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 64],
+  relativeLinkResolution: 'legacy'
+};
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cadastrar', component: CadastarAnimalComponent, canActivate: [AuthGuardService] },
@@ -31,17 +38,6 @@ const routes: Routes = [
   { path: 'compartilhar/:codigo', component: AdicionarAnimalCompartilhadoComponent },
   { path: 'sobre', component: SobreComponent },
 ];
-const routerOptions: ExtraOptions = {
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
-    scrollOffset: [0, 64],
-    relativeLinkResolution: 'legacy'
-}{
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
-    scrollOffset: [0, 64],
-    relativeLinkResolution: 'legacy'
-};
 
 
 @NgModule({
